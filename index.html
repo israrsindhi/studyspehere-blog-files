@@ -1,0 +1,2463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudySphere Pro | Advanced Study Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+        }
+
+        :root {
+            --primary: #7C3AED;
+            --secondary: #10B981;
+            --accent: #F59E0B;
+            --dark: #1F2937;
+            --darker: #111827;
+            --light: #F9FAFB;
+            --gray: #6B7280;
+            --light-gray: #E5E7EB;
+            --card-bg: #FFFFFF;
+            --danger: #EF4444;
+            --success: #10B981;
+            --info: #3B82F6;
+            --border-radius: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+        }
+
+        .dark-theme {
+            --primary: #A78BFA;
+            --secondary: #34D399;
+            --accent: #FBBF24;
+            --dark: #F9FAFB;
+            --darker: #E5E7EB;
+            --light: #111827;
+            --gray: #9CA3AF;
+            --light-gray: #374151;
+            --card-bg: #1F2937;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 20px 40px -10px rgba(0, 0, 0, 0.4);
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            transition: var(--transition);
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--card-bg);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo i {
+            color: var(--secondary);
+            font-size: 2.2rem;
+        }
+
+        .logo span {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            transition: var(--transition);
+            padding: 8px 16px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        nav a:hover {
+            background-color: rgba(124, 58, 237, 0.1);
+            color: var(--primary);
+        }
+
+        nav a.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: var(--light-gray);
+            border-radius: 50px;
+            padding: 12px 24px;
+            width: 300px;
+            transition: var(--transition);
+        }
+
+        .search-bar:focus-within {
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
+        }
+
+        .search-bar input {
+            border: none;
+            background: transparent;
+            width: 100%;
+            margin-left: 12px;
+            outline: none;
+            font-size: 0.95rem;
+            color: var(--dark);
+        }
+
+        .theme-toggle, .mobile-menu-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover, .mobile-menu-btn:hover {
+            background-color: var(--light-gray);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 100px 0;
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%);
+            border-radius: 0 0 40px 40px;
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%237C3AED' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 24px;
+            line-height: 1.2;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--gray);
+            margin-bottom: 40px;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .articles-section {
+            flex: 3;
+        }
+
+        .sidebar {
+            flex: 1;
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--dark);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        /* Articles Grid */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .article-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            border: 1px solid var(--light-gray);
+        }
+
+        .article-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .article-image {
+            height: 200px;
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .article-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.1));
+        }
+
+        .article-content {
+            padding: 30px;
+        }
+
+        .article-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .article-category {
+            display: inline-block;
+            background: rgba(124, 58, 237, 0.1);
+            color: var(--primary);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .article-bookmark {
+            background: none;
+            border: none;
+            color: var(--gray);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            padding: 5px;
+            border-radius: 6px;
+        }
+
+        .article-bookmark:hover {
+            color: var(--accent);
+            background: rgba(245, 158, 11, 0.1);
+        }
+
+        .article-bookmark.active {
+            color: var(--accent);
+        }
+
+        .article-title {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            line-height: 1.4;
+            color: var(--dark);
+        }
+
+        .article-excerpt {
+            color: var(--gray);
+            margin-bottom: 24px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .article-author {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .author-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Blog Post View */
+        .blog-post-container {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+            overflow: hidden;
+        }
+
+        .blog-post-header {
+            padding: 50px 50px 30px;
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.05) 0%, rgba(16, 185, 129, 0.05) 100%);
+        }
+
+        .blog-post-title {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+            line-height: 1.2;
+        }
+
+        .blog-post-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid var(--light-gray);
+        }
+
+        .blog-post-author {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .blog-author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .blog-author-info h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+
+        .blog-author-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .blog-post-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .action-btn {
+            background: var(--light-gray);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 12px;
+            color: var(--dark);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .action-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .action-btn.success {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+
+        .action-btn.success:hover {
+            background: var(--success);
+            color: white;
+        }
+
+        .blog-post-image {
+            height: 400px;
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 6rem;
+        }
+
+        .blog-post-content {
+            padding: 50px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .blog-post-content h2 {
+            margin: 40px 0 20px;
+            color: var(--primary);
+            font-size: 2rem;
+        }
+
+        .blog-post-content p {
+            margin-bottom: 24px;
+            color: var(--dark);
+        }
+
+        .blog-post-content ul, .blog-post-content ol {
+            margin-left: 24px;
+            margin-bottom: 24px;
+        }
+
+        .blog-post-content li {
+            margin-bottom: 8px;
+            color: var(--dark);
+        }
+
+        /* Comments Section */
+        .comments-section {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow);
+        }
+
+        .comments-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .comments-count {
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .comment-form {
+            background: var(--light-gray);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            margin-bottom: 40px;
+        }
+
+        .comment-form h3 {
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            background: var(--card-bg);
+            color: var(--dark);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
+        }
+
+        .comment-submit {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .comment-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(124, 58, 237, 0.3);
+        }
+
+        .comments-list {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .comment {
+            background: var(--light-gray);
+            padding: 24px;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .comment:hover {
+            transform: translateX(5px);
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .comment-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .comment-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+
+        .comment-info h4 {
+            color: var(--dark);
+            margin-bottom: 4px;
+        }
+
+        .comment-date {
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+
+        .comment-content {
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Sidebar Widgets */
+        .sidebar-widget {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--light-gray);
+        }
+
+        .widget-title {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .widget-title i {
+            color: var(--primary);
+        }
+
+        .categories-list, .recent-posts, .bookmarked-posts {
+            list-style: none;
+        }
+
+        .categories-list li, .recent-posts li, .bookmarked-posts li {
+            padding: 14px 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .categories-list li:last-child, .recent-posts li:last-child, .bookmarked-posts li:last-child {
+            border-bottom: none;
+        }
+
+        .categories-list a, .recent-posts a, .bookmarked-posts a {
+            text-decoration: none;
+            color: var(--dark);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+            padding: 8px;
+            border-radius: 8px;
+        }
+
+        .categories-list a:hover, .recent-posts a:hover, .bookmarked-posts a:hover {
+            background-color: rgba(124, 58, 237, 0.1);
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .category-count {
+            background: rgba(124, 58, 237, 0.1);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .recent-post, .bookmarked-post {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .recent-post img, .bookmarked-post img {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .recent-post-content h4, .bookmarked-post-content h4 {
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+            line-height: 1.4;
+            color: var(--dark);
+        }
+
+        .recent-post-content span, .bookmarked-post-content span {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        /* Reading Progress */
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: transparent;
+            z-index: 1001;
+            display: none;
+        }
+
+        .reading-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Bookmarks Page */
+        .bookmarks-page {
+            display: none;
+        }
+
+        .bookmarks-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 40px;
+            color: var(--gray);
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: var(--light-gray);
+        }
+
+        /* Newsletter */
+        .newsletter {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: var(--border-radius);
+            padding: 60px;
+            text-align: center;
+            color: white;
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newsletter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.2;
+        }
+
+        .newsletter-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .newsletter h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .newsletter p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 50px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 20px 30px;
+            border: none;
+            font-size: 1rem;
+            outline: none;
+            color: var(--darker);
+        }
+
+        .newsletter-form button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .newsletter-form button:hover {
+            background: #EAB308;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--card-bg);
+            color: white;
+            padding: 80px 0 30px;
+            margin-top: 60px;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            color: var(--dark);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column ul li a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--light-gray);
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Back Button */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 12px 24px;
+            background: var(--light-gray);
+            border-radius: 12px;
+            transition: var(--transition);
+        }
+
+        .back-button:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateX(-5px);
+        }
+
+        /* Loading States */
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: var(--gray);
+        }
+
+        .loading i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                position: static;
+                width: 100%;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-wrap: wrap;
+            }
+            
+            nav {
+                display: none;
+                width: 100%;
+                order: 3;
+                margin-top: 20px;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .search-bar {
+                width: 100%;
+                order: 2;
+                margin-top: 20px;
+            }
+            
+            .header-controls {
+                width: 100%;
+                justify-content: space-between;
+                order: 1;
+            }
+            
+            .mobile-menu-btn {
+                display: flex;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-stats {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .blog-post-title {
+                font-size: 2.2rem;
+            }
+            
+            .blog-post-meta {
+                flex-direction: column;
+                gap: 20px;
+                align-items: flex-start;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+                border-radius: var(--border-radius);
+            }
+            
+            .newsletter-form input,
+            .newsletter-form button {
+                width: 100%;
+                border-radius: 0;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero {
+                padding: 60px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .blog-post-content {
+                padding: 30px 20px;
+            }
+            
+            .comments-section {
+                padding: 20px;
+            }
+            
+            .newsletter {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress" id="readingProgress">
+        <div class="reading-progress-bar" id="readingProgressBar"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo" id="homeLink">
+                    <i class="fas fa-brain"></i>
+                    <span>StudySphere Pro</span>
+                </a>
+                
+                <div class="header-controls">
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Search articles...">
+                    </div>
+                    
+                    <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    
+                    <button class="mobile-menu-btn" id="mobileMenuBtn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+                
+                <nav id="mainNav">
+                    <ul>
+                        <li><a href="#" class="active" data-page="home"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="#" data-page="bookmarks"><i class="fas fa-bookmark"></i> Bookmarks</a></li>
+                        <li><a href="#" data-page="subjects"><i class="fas fa-folder"></i> Subjects</a></li>
+                        <li><a href="#" data-page="authors"><i class="fas fa-users"></i> Authors</a></li>
+                        <li><a href="#" data-page="about"><i class="fas fa-info-circle"></i> About</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Elevate Your Learning Experience</h1>
+                <p>Access premium study materials, interactive content, and join a community of dedicated learners. Bookmark, comment, and export your favorite articles.</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number" id="totalArticles">0</span>
+                        <span class="stat-label">Articles</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" id="activeUsers">1.2K</span>
+                        <span class="stat-label">Active Learners</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" id="studyHours">5.7K</span>
+                        <span class="stat-label">Study Hours</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <div class="container">
+        <!-- Home Page -->
+        <div id="homePage">
+            <div class="main-content">
+                <!-- Articles Section -->
+                <section class="articles-section">
+                    <h2 class="section-title">Latest Study Articles</h2>
+                    
+                    <div id="loadingArticles" class="loading">
+                        <i class="fas fa-spinner"></i>
+                        <p>Loading articles from external JSON file...</p>
+                    </div>
+                    
+                    <div id="articlesGrid" class="articles-grid" style="display: none;">
+                        <!-- Articles will be dynamically loaded here -->
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 30px;">
+                        <button id="loadMoreBtn" class="action-btn" style="display: none;">
+                            <i class="fas fa-plus"></i> Load More Articles
+                        </button>
+                    </div>
+                </section>
+                
+                <!-- Sidebar -->
+                <aside class="sidebar">
+                    <!-- Categories Widget -->
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title"><i class="fas fa-tags"></i> Categories</h3>
+                        <div id="loadingCategories" class="loading">
+                            <i class="fas fa-spinner"></i>
+                            <p>Loading categories...</p>
+                        </div>
+                        <ul id="categoriesList" class="categories-list" style="display: none;">
+                            <!-- Categories will be dynamically loaded here -->
+                        </ul>
+                    </div>
+                    
+                    <!-- Recent Posts Widget -->
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title"><i class="fas fa-history"></i> Recent Posts</h3>
+                        <div id="loadingRecent" class="loading">
+                            <i class="fas fa-spinner"></i>
+                            <p>Loading recent posts...</p>
+                        </div>
+                        <ul id="recentPosts" class="recent-posts" style="display: none;">
+                            <!-- Recent posts will be dynamically loaded here -->
+                        </ul>
+                    </div>
+                    
+                    <!-- Bookmarked Posts Widget -->
+                    <div class="sidebar-widget">
+                        <h3 class="widget-title"><i class="fas fa-bookmark"></i> Your Bookmarks</h3>
+                        <div id="loadingBookmarks" class="loading">
+                            <i class="fas fa-spinner"></i>
+                            <p>Loading bookmarks...</p>
+                        </div>
+                        <ul id="bookmarkedPosts" class="bookmarked-posts" style="display: none;">
+                            <!-- Bookmarked posts will be dynamically loaded here -->
+                        </ul>
+                        <div id="emptyBookmarks" class="empty-state" style="display: none;">
+                            <i class="fas fa-bookmark"></i>
+                            <p>No bookmarks yet. Save articles to read later!</p>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+
+        <!-- Blog Post View -->
+        <div id="blogPostView" style="display: none;">
+            <a href="#" class="back-button" id="backToArticles">
+                <i class="fas fa-arrow-left"></i> Back to Articles
+            </a>
+            
+            <div id="blogPostContainer" class="blog-post-container">
+                <!-- Blog post will be dynamically loaded here -->
+            </div>
+            
+            <!-- Comments Section -->
+            <div class="comments-section" id="commentsSection">
+                <div class="comments-header">
+                    <h2 class="section-title">Comments</h2>
+                    <span class="comments-count" id="commentsCount">0 Comments</span>
+                </div>
+                
+                <!-- Comment Form -->
+                <div class="comment-form">
+                    <h3>Add a Comment</h3>
+                    <form id="commentForm">
+                        <div class="form-group">
+                            <label for="commentName">Name</label>
+                            <input type="text" id="commentName" placeholder="Your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="commentEmail">Email (optional)</label>
+                            <input type="email" id="commentEmail" placeholder="Your email">
+                        </div>
+                        <div class="form-group">
+                            <label for="commentText">Comment</label>
+                            <textarea id="commentText" rows="4" placeholder="Share your thoughts..." required></textarea>
+                        </div>
+                        <button type="submit" class="comment-submit">
+                            <i class="fas fa-paper-plane"></i> Post Comment
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Comments List -->
+                <div class="comments-list" id="commentsList">
+                    <!-- Comments will be dynamically loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Bookmarks Page -->
+        <div id="bookmarksPage" class="bookmarks-page">
+            <div class="bookmarks-header">
+                <h2 class="section-title">Your Bookmarked Articles</h2>
+                <button class="action-btn" id="clearBookmarks">
+                    <i class="fas fa-trash"></i> Clear All
+                </button>
+            </div>
+            
+            <div id="bookmarksGrid" class="articles-grid">
+                <!-- Bookmarked articles will be dynamically loaded here -->
+            </div>
+            
+            <div id="emptyBookmarksPage" class="empty-state" style="display: none;">
+                <i class="fas fa-bookmark"></i>
+                <h3>No Bookmarks Yet</h3>
+                <p>Start bookmarking articles to save them for later reading!</p>
+                <a href="#" class="action-btn" data-page="home" style="margin-top: 20px;">
+                    <i class="fas fa-book-open"></i> Browse Articles
+                </a>
+            </div>
+        </div>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter">
+            <div class="newsletter-content">
+                <h2>Never Miss an Update</h2>
+                <p>Subscribe to our newsletter and get the latest study tips, articles, and resources delivered directly to your inbox.</p>
+                <form class="newsletter-form" id="newsletterForm">
+                    <input type="email" id="newsletterEmail" placeholder="Enter your email address" required>
+                    <button type="submit">
+                        <i class="fas fa-paper-plane"></i> Subscribe
+                    </button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>StudySphere Pro</h3>
+                    <p style="color: var(--gray); margin-bottom: 20px;">Advanced learning platform for students and professionals. Bookmark, comment, and export articles.</p>
+                    <div style="display: flex; gap: 15px;">
+                        <a href="#" style="color: var(--gray); font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: var(--gray); font-size: 1.2rem;"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" style="color: var(--gray); font-size: 1.2rem;"><i class="fab fa-github"></i></a>
+                        <a href="#" style="color: var(--gray); font-size: 1.2rem;"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Features</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-bookmark"></i> Smart Bookmarks</a></li>
+                        <li><a href="#"><i class="fas fa-comments"></i> Comments System</a></li>
+                        <li><a href="#"><i class="fas fa-file-pdf"></i> PDF Export</a></li>
+                        <li><a href="#"><i class="fas fa-moon"></i> Dark Mode</a></li>
+                        <li><a href="#"><i class="fas fa-chart-line"></i> Reading Progress</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-graduation-cap"></i> Study Guides</a></li>
+                        <li><a href="#"><i class="fas fa-file-alt"></i> Research Papers</a></li>
+                        <li><a href="#"><i class="fas fa-tools"></i> Learning Tools</a></li>
+                        <li><a href="#"><i class="fas fa-calendar-alt"></i> Study Planner</a></li>
+                        <li><a href="#"><i class="fas fa-question-circle"></i> Help Center</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-envelope"></i> support@studysphere.pro</a></li>
+                        <li><a href="#"><i class="fas fa-phone"></i> +1 (555) 123-4567</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> 456 Learning St, Edu City</a></li>
+                        <li><a href="#"><i class="fas fa-file-contract"></i> Privacy Policy</a></li>
+                        <li><a href="#"><i class="fas fa-file-signature"></i> Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 StudySphere Pro. All rights reserved. | Data loaded from external JSON file</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jsPDF Library for PDF Export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <script>
+        // Global state
+        const state = {
+            articles: [],
+            categories: [],
+            comments: [],
+            studyTips: [],
+            currentView: 'home',
+            currentPostId: null,
+            displayedArticles: 4,
+            searchQuery: '',
+            bookmarks: JSON.parse(localStorage.getItem('studySphereBookmarks')) || [],
+            theme: localStorage.getItem('studySphereTheme') || 'light',
+            readingProgress: 0
+        };
+
+        // DOM Elements
+        const homePage = document.getElementById('homePage');
+        const blogPostView = document.getElementById('blogPostView');
+        const bookmarksPage = document.getElementById('bookmarksPage');
+        const articlesGrid = document.getElementById('articlesGrid');
+        const blogPostContainer = document.getElementById('blogPostContainer');
+        const commentsList = document.getElementById('commentsList');
+        const categoriesList = document.getElementById('categoriesList');
+        const recentPosts = document.getElementById('recentPosts');
+        const bookmarkedPosts = document.getElementById('bookmarkedPosts');
+        const bookmarksGrid = document.getElementById('bookmarksGrid');
+        const loadingArticles = document.getElementById('loadingArticles');
+        const loadingCategories = document.getElementById('loadingCategories');
+        const loadingRecent = document.getElementById('loadingRecent');
+        const loadingBookmarks = document.getElementById('loadingBookmarks');
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+        const backToArticles = document.getElementById('backToArticles');
+        const searchInput = document.getElementById('searchInput');
+        const themeToggle = document.getElementById('themeToggle');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        const homeLink = document.getElementById('homeLink');
+        const clearBookmarks = document.getElementById('clearBookmarks');
+        const emptyBookmarks = document.getElementById('emptyBookmarks');
+        const emptyBookmarksPage = document.getElementById('emptyBookmarksPage');
+        const commentForm = document.getElementById('commentForm');
+        const commentsCount = document.getElementById('commentsCount');
+        const newsletterForm = document.getElementById('newsletterForm');
+        const readingProgress = document.getElementById('readingProgress');
+        const readingProgressBar = document.getElementById('readingProgressBar');
+        const totalArticles = document.getElementById('totalArticles');
+
+        // Icon mapping
+        const iconMap = {
+            'atom': 'fas fa-atom',
+            'brain': 'fas fa-brain',
+            'flask': 'fas fa-flask',
+            'calculator': 'fas fa-calculator',
+            'link': 'fas fa-link',
+            'dna': 'fas fa-dna',
+            'code': 'fas fa-code',
+            'vial': 'fas fa-vial',
+            'default': 'fas fa-book-open'
+        };
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Set initial theme
+            if (state.theme === 'dark') {
+                document.body.classList.add('dark-theme');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+
+            // Load external JSON data
+            await loadExternalData();
+            
+            // Set up event listeners
+            setupEventListeners();
+            
+            // Update bookmark widgets
+            updateBookmarkWidgets();
+            
+            // Update stats
+            updateStats();
+        });
+
+        // Load external JSON data
+        async function loadExternalData() {
+            try {
+                // Show loading state
+                if (loadingArticles) loadingArticles.style.display = 'block';
+                if (loadingCategories) loadingCategories.style.display = 'block';
+                if (loadingRecent) loadingRecent.style.display = 'block';
+                if (loadingBookmarks) loadingBookmarks.style.display = 'block';
+                
+                // Load the external JSON file
+                const response = await fetch('studysphere-data.json');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                // Store data in state
+                state.articles = data.articles || [];
+                state.categories = data.categories || [];
+                state.comments = data.comments || [];
+                state.studyTips = data.studyTips || [];
+                
+                // Sort articles by date (newest first)
+                state.articles.sort((a, b) => new Date(b.date) - new Date(a.date));
+                
+                // Render data
+                renderArticles();
+                renderCategories();
+                renderRecentPosts();
+                renderBookmarkedPosts();
+                
+                // Hide loading states
+                if (loadingArticles) loadingArticles.style.display = 'none';
+                if (loadingCategories) loadingCategories.style.display = 'none';
+                if (loadingRecent) loadingRecent.style.display = 'none';
+                if (loadingBookmarks) loadingBookmarks.style.display = 'none';
+                
+                console.log('Data loaded successfully from external JSON file:', data.siteInfo?.name);
+                
+            } catch (error) {
+                console.error('Error loading external data:', error);
+                
+                // Show error to user
+                showError('Failed to load data. Please check if "studysphere-data.json" file exists and contains valid JSON.');
+                
+                // Use fallback data
+                loadFallbackData();
+            }
+        }
+
+        // Fallback data if external file fails
+        function loadFallbackData() {
+            const fallbackData = {
+                articles: [
+                    {
+                        id: 1,
+                        title: "Sample Article",
+                        excerpt: "This is a sample article that loads when external data fails.",
+                        content: "<h2>Sample Content</h2><p>This content loads when the external JSON file cannot be loaded.</p>",
+                        category: "General",
+                        author: { id: 1, name: "Admin", avatar: "A", bio: "System Administrator" },
+                        date: "2023-01-01",
+                        readTime: 5,
+                        views: 100,
+                        likes: 10,
+                        commentsCount: 0,
+                        tags: ["sample"],
+                        icon: "default",
+                        featured: true
+                    }
+                ],
+                categories: [
+                    { name: "General", count: 1, color: "#7C3AED", icon: "book" }
+                ],
+                comments: [],
+                studyTips: ["Check that the JSON file exists and is valid."]
+            };
+            
+            state.articles = fallbackData.articles;
+            state.categories = fallbackData.categories;
+            state.comments = fallbackData.comments;
+            state.studyTips = fallbackData.studyTips;
+            
+            renderArticles();
+            renderCategories();
+            renderRecentPosts();
+            
+            // Hide loading states
+            if (loadingArticles) loadingArticles.style.display = 'none';
+            if (loadingCategories) loadingCategories.style.display = 'none';
+            if (loadingRecent) loadingRecent.style.display = 'none';
+            if (loadingBookmarks) loadingBookmarks.style.display = 'none';
+        }
+
+        // Set up event listeners
+        function setupEventListeners() {
+            // Theme toggle
+            themeToggle.addEventListener('click', toggleTheme);
+            
+            // Mobile menu toggle
+            mobileMenuBtn.addEventListener('click', () => {
+                mainNav.classList.toggle('active');
+                mobileMenuBtn.innerHTML = mainNav.classList.contains('active') 
+                    ? '<i class="fas fa-times"></i>' 
+                    : '<i class="fas fa-bars"></i>';
+            });
+            
+            // Home link
+            homeLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                showPage('home');
+            });
+            
+            // Navigation links
+            document.querySelectorAll('[data-page]').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const page = e.target.closest('a').getAttribute('data-page');
+                    showPage(page);
+                    // Close mobile menu if open
+                    if (mainNav.classList.contains('active')) {
+                        mainNav.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                });
+            });
+            
+            // Search input
+            searchInput.addEventListener('input', handleSearch);
+            
+            // Load more articles button
+            if (loadMoreBtn) {
+                loadMoreBtn.addEventListener('click', loadMoreArticles);
+            }
+            
+            // Back to articles button
+            if (backToArticles) {
+                backToArticles.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showPage('home');
+                });
+            }
+            
+            // Clear bookmarks button
+            if (clearBookmarks) {
+                clearBookmarks.addEventListener('click', clearAllBookmarks);
+            }
+            
+            // Comment form submission
+            if (commentForm) {
+                commentForm.addEventListener('submit', handleCommentSubmit);
+            }
+            
+            // Newsletter form submission
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', handleNewsletterSubmit);
+            }
+            
+            // Reading progress tracking
+            window.addEventListener('scroll', updateReadingProgress);
+            
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('nav') && !e.target.closest('.mobile-menu-btn') && mainNav.classList.contains('active')) {
+                    mainNav.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            });
+        }
+
+        // Toggle theme
+        function toggleTheme() {
+            if (document.body.classList.contains('dark-theme')) {
+                document.body.classList.remove('dark-theme');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                state.theme = 'light';
+            } else {
+                document.body.classList.add('dark-theme');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                state.theme = 'dark';
+            }
+            localStorage.setItem('studySphereTheme', state.theme);
+        }
+
+        // Show page
+        function showPage(page) {
+            // Hide all pages
+            homePage.style.display = 'none';
+            blogPostView.style.display = 'none';
+            bookmarksPage.style.display = 'none';
+            
+            // Reset navigation active state
+            document.querySelectorAll('[data-page]').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Show selected page
+            switch(page) {
+                case 'home':
+                    homePage.style.display = 'block';
+                    document.querySelector('[data-page="home"]').classList.add('active');
+                    readingProgress.style.display = 'none';
+                    break;
+                    
+                case 'blogPost':
+                    blogPostView.style.display = 'block';
+                    readingProgress.style.display = 'block';
+                    break;
+                    
+                case 'bookmarks':
+                    bookmarksPage.style.display = 'block';
+                    document.querySelector('[data-page="bookmarks"]').classList.add('active');
+                    renderBookmarksPage();
+                    readingProgress.style.display = 'none';
+                    break;
+                    
+                case 'subjects':
+                    showPage('home');
+                    document.querySelector('[data-page="subjects"]').classList.add('active');
+                    // Scroll to categories
+                    setTimeout(() => {
+                        document.getElementById('categoriesList').scrollIntoView({ behavior: 'smooth' });
+                    }, 100);
+                    break;
+                    
+                case 'authors':
+                    alert('Authors page would show all contributors. Check the JSON data file for author information.');
+                    showPage('home');
+                    document.querySelector('[data-page="authors"]').classList.add('active');
+                    break;
+                    
+                case 'about':
+                    alert('About page would show information about StudySphere Pro. Check the JSON data file for site information.');
+                    showPage('home');
+                    document.querySelector('[data-page="about"]').classList.add('active');
+                    break;
+            }
+            
+            state.currentView = page;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Render articles
+        function renderArticles() {
+            if (!articlesGrid) return;
+            
+            // Filter articles based on search query
+            let filteredArticles = state.articles;
+            if (state.searchQuery) {
+                const query = state.searchQuery.toLowerCase();
+                filteredArticles = state.articles.filter(article => 
+                    article.title.toLowerCase().includes(query) ||
+                    article.excerpt.toLowerCase().includes(query) ||
+                    article.category.toLowerCase().includes(query) ||
+                    (article.tags && article.tags.some(tag => tag.toLowerCase().includes(query)))
+                );
+            }
+            
+            // Show/hide load more button
+            if (loadMoreBtn) {
+                loadMoreBtn.style.display = filteredArticles.length > state.displayedArticles ? 'inline-flex' : 'none';
+            }
+            
+            // Get articles to display
+            const articlesToDisplay = filteredArticles.slice(0, state.displayedArticles);
+            
+            // Clear the grid
+            articlesGrid.innerHTML = '';
+            
+            if (articlesToDisplay.length === 0) {
+                articlesGrid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 60px; color: var(--gray);">
+                        <i class="fas fa-search" style="font-size: 4rem; margin-bottom: 20px; color: var(--light-gray);"></i>
+                        <h3>No articles found</h3>
+                        <p>${state.searchQuery ? 'Try a different search term' : 'No articles available'}.</p>
+                    </div>
+                `;
+            } else {
+                // Add articles to grid
+                articlesToDisplay.forEach(article => {
+                    const articleElement = createArticleCard(article);
+                    articlesGrid.appendChild(articleElement);
+                });
+            }
+            
+            // Show grid
+            articlesGrid.style.display = 'grid';
+        }
+
+        // Create article card
+        function createArticleCard(article) {
+            const articleElement = document.createElement('div');
+            articleElement.className = 'article-card';
+            articleElement.setAttribute('data-id', article.id);
+            
+            // Format date
+            const dateObj = new Date(article.date);
+            const formattedDate = dateObj.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric' 
+            });
+            
+            // Get icon
+            const iconClass = iconMap[article.icon] || iconMap.default;
+            
+            // Check if bookmarked
+            const isBookmarked = state.bookmarks.includes(article.id);
+            
+            articleElement.innerHTML = `
+                <div class="article-image">
+                    <i class="${iconClass}"></i>
+                </div>
+                <div class="article-content">
+                    <div class="article-header">
+                        <span class="article-category">${article.category}</span>
+                        <button class="article-bookmark ${isBookmarked ? 'active' : ''}" data-id="${article.id}">
+                            <i class="fas fa-bookmark"></i>
+                        </button>
+                    </div>
+                    <h3 class="article-title">${article.title}</h3>
+                    <p class="article-excerpt">${article.excerpt}</p>
+                    <div class="article-meta">
+                        <div class="article-author">
+                            <div class="author-avatar">${article.author.avatar}</div>
+                            <span>${article.author.name}</span>
+                        </div>
+                        <div>
+                            <span><i class="far fa-calendar"></i> ${formattedDate} • ${article.readTime} min</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Add click event to show blog post
+            articleElement.addEventListener('click', (e) => {
+                if (!e.target.closest('.article-bookmark')) {
+                    showBlogPost(article.id);
+                }
+            });
+            
+            // Add bookmark button event
+            const bookmarkBtn = articleElement.querySelector('.article-bookmark');
+            bookmarkBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleBookmark(article.id, bookmarkBtn);
+            });
+            
+            return articleElement;
+        }
+
+        // Show blog post
+        function showBlogPost(id) {
+            const article = state.articles.find(a => a.id === id);
+            if (!article) return;
+            
+            state.currentPostId = id;
+            
+            // Format date
+            const dateObj = new Date(article.date);
+            const formattedDate = dateObj.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            
+            // Get icon
+            const iconClass = iconMap[article.icon] || iconMap.default;
+            
+            // Check if bookmarked
+            const isBookmarked = state.bookmarks.includes(article.id);
+            
+            // Get article comments
+            const articleComments = state.comments.filter(c => c.articleId === id);
+            
+            // Update comments count
+            commentsCount.textContent = `${articleComments.length} Comment${articleComments.length !== 1 ? 's' : ''}`;
+            
+            // Create tags HTML
+            const tagsHTML = article.tags ? article.tags.map(tag => 
+                `<span class="blog-tag" style="background: var(--light-gray); padding: 8px 16px; border-radius: 50px; font-size: 0.9rem; color: var(--gray); margin-right: 10px; display: inline-block; margin-bottom: 10px;">${tag}</span>`
+            ).join('') : '';
+            
+            // Update blog post content
+            blogPostContainer.innerHTML = `
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">${article.title}</h1>
+                    <div class="blog-post-meta">
+                        <div class="blog-post-author">
+                            <div class="blog-author-avatar">${article.author.avatar}</div>
+                            <div class="blog-author-info">
+                                <h4>${article.author.name}</h4>
+                                <p>${article.author.bio}</p>
+                            </div>
+                        </div>
+                        <div class="blog-post-actions">
+                            <button class="action-btn ${isBookmarked ? 'success' : ''}" id="bookmarkPostBtn">
+                                <i class="fas fa-bookmark"></i> ${isBookmarked ? 'Bookmarked' : 'Bookmark'}
+                            </button>
+                            <button class="action-btn" id="exportPdfBtn">
+                                <i class="fas fa-file-pdf"></i> Export PDF
+                            </button>
+                        </div>
+                    </div>
+                    <div style="margin-top: 20px; color: var(--gray);">
+                        <span><i class="far fa-calendar"></i> ${formattedDate} • </span>
+                        <span><i class="far fa-clock"></i> ${article.readTime} min read • </span>
+                        <span><i class="far fa-eye"></i> ${article.views} views</span>
+                    </div>
+                </div>
+                <div class="blog-post-image">
+                    <i class="${iconClass}"></i>
+                </div>
+                <div class="blog-post-content">
+                    ${article.content}
+                    ${tagsHTML ? `<div style="margin-top: 40px;"><h3>Tags:</h3><div>${tagsHTML}</div></div>` : ''}
+                </div>
+            `;
+            
+            // Set up action buttons
+            document.getElementById('bookmarkPostBtn').addEventListener('click', () => {
+                toggleBookmark(id, document.getElementById('bookmarkPostBtn'));
+            });
+            
+            document.getElementById('exportPdfBtn').addEventListener('click', () => {
+                exportToPDF(article);
+            });
+            
+            // Render comments
+            renderComments(articleComments);
+            
+            // Switch to blog post view
+            showPage('blogPost');
+            
+            // Update reading progress
+            updateReadingProgress();
+            
+            // Update URL (without page reload)
+            history.pushState({ view: 'blogPost', id: id }, '', `?post=${id}`);
+        }
+
+        // Render comments
+        function renderComments(comments) {
+            if (!commentsList) return;
+            
+            commentsList.innerHTML = '';
+            
+            if (comments.length === 0) {
+                commentsList.innerHTML = `
+                    <div class="empty-state" style="padding: 40px;">
+                        <i class="far fa-comments"></i>
+                        <h3>No Comments Yet</h3>
+                        <p>Be the first to share your thoughts on this article!</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            comments.forEach(comment => {
+                const commentElement = document.createElement('div');
+                commentElement.className = 'comment';
+                
+                // Format date
+                const dateObj = new Date(comment.date);
+                const formattedDate = dateObj.toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                });
+                
+                commentElement.innerHTML = `
+                    <div class="comment-header">
+                        <div class="comment-author">
+                            <div class="comment-avatar">${comment.avatar}</div>
+                            <div class="comment-info">
+                                <h4>${comment.name}</h4>
+                                <span class="comment-date">${formattedDate}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment-content">
+                        ${comment.content}
+                    </div>
+                `;
+                
+                commentsList.appendChild(commentElement);
+            });
+        }
+
+        // Handle comment submission
+        function handleCommentSubmit(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('commentName').value;
+            const email = document.getElementById('commentEmail').value;
+            const text = document.getElementById('commentText').value;
+            
+            if (!name || !text) {
+                showError('Please fill in all required fields');
+                return;
+            }
+            
+            // Create new comment
+            const newComment = {
+                id: Date.now(),
+                articleId: state.currentPostId,
+                name: name,
+                avatar: name.substring(0, 2).toUpperCase(),
+                date: new Date().toISOString().split('T')[0],
+                content: text
+            };
+            
+            // Add to comments
+            state.comments.push(newComment);
+            
+            // Get article comments
+            const articleComments = state.comments.filter(c => c.articleId === state.currentPostId);
+            
+            // Update UI
+            renderComments(articleComments);
+            commentsCount.textContent = `${articleComments.length} Comment${articleComments.length !== 1 ? 's' : ''}`;
+            
+            // Reset form
+            commentForm.reset();
+            
+            // Show success message
+            showSuccess('Comment posted successfully!');
+        }
+
+        // Toggle bookmark
+        function toggleBookmark(articleId, button) {
+            const index = state.bookmarks.indexOf(articleId);
+            
+            if (index === -1) {
+                // Add bookmark
+                state.bookmarks.push(articleId);
+                if (button) {
+                    button.classList.add('active');
+                    if (button.id === 'bookmarkPostBtn') {
+                        button.innerHTML = '<i class="fas fa-bookmark"></i> Bookmarked';
+                        button.classList.add('success');
+                    }
+                }
+                showSuccess('Article bookmarked!');
+            } else {
+                // Remove bookmark
+                state.bookmarks.splice(index, 1);
+                if (button) {
+                    button.classList.remove('active');
+                    if (button.id === 'bookmarkPostBtn') {
+                        button.innerHTML = '<i class="fas fa-bookmark"></i> Bookmark';
+                        button.classList.remove('success');
+                    }
+                }
+                showSuccess('Bookmark removed!');
+            }
+            
+            // Update localStorage
+            localStorage.setItem('studySphereBookmarks', JSON.stringify(state.bookmarks));
+            
+            // Update bookmark widgets
+            updateBookmarkWidgets();
+            
+            // Update bookmarks page if visible
+            if (state.currentView === 'bookmarks') {
+                renderBookmarksPage();
+            }
+        }
+
+        // Update bookmark widgets
+        function updateBookmarkWidgets() {
+            // Update sidebar bookmarks
+            renderBookmarkedPosts();
+            
+            // Update empty state
+            if (state.bookmarks.length === 0) {
+                if (emptyBookmarks) emptyBookmarks.style.display = 'block';
+                if (bookmarkedPosts) bookmarkedPosts.style.display = 'none';
+            } else {
+                if (emptyBookmarks) emptyBookmarks.style.display = 'none';
+                if (bookmarkedPosts) bookmarkedPosts.style.display = 'block';
+            }
+        }
+
+        // Render bookmarked posts in sidebar
+        function renderBookmarkedPosts() {
+            if (!bookmarkedPosts) return;
+            
+            // Clear the list
+            bookmarkedPosts.innerHTML = '';
+            
+            // Get bookmarked articles (limit to 4)
+            const bookmarkedArticles = state.articles
+                .filter(article => state.bookmarks.includes(article.id))
+                .slice(0, 4);
+            
+            // Add bookmarked posts to list
+            bookmarkedArticles.forEach(article => {
+                const li = document.createElement('li');
+                
+                // Format date
+                const dateObj = new Date(article.date);
+                const formattedDate = dateObj.toLocaleDateString('en-US', { 
+                    month: 'short', 
+                    day: 'numeric' 
+                });
+                
+                // Get icon
+                const iconClass = iconMap[article.icon] || iconMap.default;
+                
+                li.innerHTML = `
+                    <a href="#" data-id="${article.id}">
+                        <div class="bookmarked-post">
+                            <div class="bookmarked-post-image">
+                                <i class="${iconClass}"></i>
+                            </div>
+                            <div class="bookmarked-post-content">
+                                <h4>${article.title}</h4>
+                                <span>${formattedDate}</span>
+                            </div>
+                        </div>
+                    </a>
+                `;
+                
+                // Add click event to show blog post
+                li.querySelector('a').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showBlogPost(article.id);
+                });
+                
+                bookmarkedPosts.appendChild(li);
+            });
+            
+            // Hide loading
+            if (loadingBookmarks) {
+                loadingBookmarks.style.display = 'none';
+            }
+        }
+
+        // Render bookmarks page
+        function renderBookmarksPage() {
+            if (!bookmarksGrid) return;
+            
+            // Get bookmarked articles
+            const bookmarkedArticles = state.articles.filter(article => state.bookmarks.includes(article.id));
+            
+            // Update empty state
+            if (bookmarkedArticles.length === 0) {
+                bookmarksGrid.style.display = 'none';
+                if (emptyBookmarksPage) emptyBookmarksPage.style.display = 'block';
+                return;
+            } else {
+                bookmarksGrid.style.display = 'grid';
+                if (emptyBookmarksPage) emptyBookmarksPage.style.display = 'none';
+            }
+            
+            // Clear the grid
+            bookmarksGrid.innerHTML = '';
+            
+            // Add bookmarked articles to grid
+            bookmarkedArticles.forEach(article => {
+                const articleElement = createArticleCard(article);
+                bookmarksGrid.appendChild(articleElement);
+            });
+        }
+
+        // Clear all bookmarks
+        function clearAllBookmarks() {
+            if (state.bookmarks.length === 0) return;
+            
+            if (confirm('Are you sure you want to remove all bookmarks?')) {
+                state.bookmarks = [];
+                localStorage.setItem('studySphereBookmarks', JSON.stringify(state.bookmarks));
+                updateBookmarkWidgets();
+                renderBookmarksPage();
+                showSuccess('All bookmarks cleared!');
+            }
+        }
+
+        // Export article to PDF
+        function exportToPDF(article) {
+            try {
+                // Create new PDF document
+                const doc = new window.jspdf.jsPDF();
+                
+                // Add title
+                doc.setFontSize(24);
+                doc.setFont('helvetica', 'bold');
+                doc.text(article.title, 20, 30);
+                
+                // Add metadata
+                doc.setFontSize(12);
+                doc.setFont('helvetica', 'normal');
+                doc.text(`By ${article.author.name} | ${new Date(article.date).toLocaleDateString()} | ${article.readTime} min read`, 20, 45);
+                
+                // Add content (strip HTML tags)
+                const content = article.content.replace(/<[^>]*>/g, '');
+                const lines = doc.splitTextToSize(content, 170);
+                doc.setFontSize(11);
+                doc.text(lines, 20, 60);
+                
+                // Add footer
+                doc.setFontSize(10);
+                doc.setTextColor(150);
+                doc.text(`Exported from StudySphere Pro - ${new Date().toLocaleDateString()}`, 20, doc.internal.pageSize.height - 10);
+                
+                // Save PDF
+                doc.save(`studysphere-${article.title.toLowerCase().replace(/\s+/g, '-')}.pdf`);
+                
+                showSuccess('PDF exported successfully!');
+            } catch (error) {
+                console.error('Error exporting PDF:', error);
+                showError('Failed to export PDF. Please try again.');
+            }
+        }
+
+        // Update reading progress
+        function updateReadingProgress() {
+            if (state.currentView !== 'blogPost') return;
+            
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            const progress = (scrollTop / (documentHeight - windowHeight)) * 100;
+            state.readingProgress = Math.min(100, Math.max(0, progress));
+            
+            if (readingProgressBar) {
+                readingProgressBar.style.width = `${state.readingProgress}%`;
+            }
+        }
+
+        // Render categories
+        function renderCategories() {
+            if (!categoriesList) return;
+            
+            // Clear the list
+            categoriesList.innerHTML = '';
+            
+            // Count articles per category
+            const categoryCounts = {};
+            state.articles.forEach(article => {
+                categoryCounts[article.category] = (categoryCounts[article.category] || 0) + 1;
+            });
+            
+            // Sort categories by count
+            const sortedCategories = Object.keys(categoryCounts).sort((a, b) => categoryCounts[b] - categoryCounts[a]);
+            
+            // Add categories to list
+            sortedCategories.forEach(category => {
+                const count = categoryCounts[category];
+                const li = document.createElement('li');
+                
+                // Find category color
+                const categoryData = state.categories.find(cat => cat.name === category);
+                const color = categoryData ? categoryData.color : '#7C3AED';
+                
+                li.innerHTML = `
+                    <a href="#" data-category="${category}">
+                        <span>${category}</span>
+                        <span class="category-count" style="background-color: ${color}20; color: ${color};">${count}</span>
+                    </a>
+                `;
+                
+                // Add click event to filter by category
+                li.querySelector('a').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    filterByCategory(category);
+                });
+                
+                categoriesList.appendChild(li);
+            });
+            
+            // Show list
+            categoriesList.style.display = 'block';
+        }
+
+        // Render recent posts
+        function renderRecentPosts() {
+            if (!recentPosts) return;
+            
+            // Clear the list
+            recentPosts.innerHTML = '';
+            
+            // Get 4 most recent articles
+            const recentArticles = [...state.articles].slice(0, 4);
+            
+            // Add recent posts to list
+            recentArticles.forEach(article => {
+                const li = document.createElement('li');
+                
+                // Format date
+                const dateObj = new Date(article.date);
+                const formattedDate = dateObj.toLocaleDateString('en-US', { 
+                    month: 'short', 
+                    day: 'numeric' 
+                });
+                
+                // Get icon
+                const iconClass = iconMap[article.icon] || iconMap.default;
+                
+                li.innerHTML = `
+                    <a href="#" data-id="${article.id}">
+                        <div class="recent-post">
+                            <div class="recent-post-image">
+                                <i class="${iconClass}"></i>
+                            </div>
+                            <div class="recent-post-content">
+                                <h4>${article.title}</h4>
+                                <span>${formattedDate}</span>
+                            </div>
+                        </div>
+                    </a>
+                `;
+                
+                // Add click event to show blog post
+                li.querySelector('a').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showBlogPost(article.id);
+                });
+                
+                recentPosts.appendChild(li);
+            });
+            
+            // Show list
+            recentPosts.style.display = 'block';
+        }
+
+        // Filter by category
+        function filterByCategory(category) {
+            searchInput.value = category;
+            handleSearch();
+        }
+
+        // Handle search
+        function handleSearch() {
+            state.searchQuery = searchInput.value.trim();
+            state.displayedArticles = 4;
+            renderArticles();
+        }
+
+        // Load more articles
+        function loadMoreArticles() {
+            state.displayedArticles += 4;
+            renderArticles();
+            
+            // Scroll to newly loaded articles
+            setTimeout(() => {
+                const newArticles = document.querySelectorAll('.article-card');
+                if (newArticles.length > 0) {
+                    newArticles[newArticles.length - 1].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            }, 100);
+        }
+
+        // Update stats
+        function updateStats() {
+            if (totalArticles) {
+                totalArticles.textContent = state.articles.length;
+            }
+        }
+
+        // Handle newsletter submission
+        function handleNewsletterSubmit(e) {
+            e.preventDefault();
+            const email = document.getElementById('newsletterEmail').value;
+            
+            if (email) {
+                showSuccess(`Thank you for subscribing with email: ${email}. You'll receive our next newsletter soon!`);
+                e.target.reset();
+            }
+        }
+
+        // Show success message
+        function showSuccess(message) {
+            // Create success toast
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, var(--success), #059669);
+                color: white;
+                padding: 16px 24px;
+                border-radius: 12px;
+                box-shadow: var(--shadow-lg);
+                z-index: 10000;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                max-width: 400px;
+                animation: slideIn 0.3s ease;
+            `;
+            
+            toast.innerHTML = `
+                <i class="fas fa-check-circle"></i>
+                <span>${message}</span>
+            `;
+            
+            document.body.appendChild(toast);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                toast.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => {
+                    if (toast.parentNode) {
+                        toast.parentNode.removeChild(toast);
+                    }
+                }, 300);
+            }, 3000);
+            
+            // Add CSS for animations
+            if (!document.querySelector('#toast-animations')) {
+                const style = document.createElement('style');
+                style.id = 'toast-animations';
+                style.textContent = `
+                    @keyframes slideIn {
+                        from { transform: translateX(100%); opacity: 0; }
+                        to { transform: translateX(0); opacity: 1; }
+                    }
+                    @keyframes slideOut {
+                        from { transform: translateX(0); opacity: 1; }
+                        to { transform: translateX(100%); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+
+        // Show error message
+        function showError(message) {
+            // Create error toast
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, var(--danger), #DC2626);
+                color: white;
+                padding: 16px 24px;
+                border-radius: 12px;
+                box-shadow: var(--shadow-lg);
+                z-index: 10000;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                max-width: 400px;
+                animation: slideIn 0.3s ease;
+            `;
+            
+            toast.innerHTML = `
+                <i class="fas fa-exclamation-triangle"></i>
+                <span>${message}</span>
+            `;
+            
+            document.body.appendChild(toast);
+            
+            // Remove after 5 seconds
+            setTimeout(() => {
+                toast.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => {
+                    if (toast.parentNode) {
+                        toast.parentNode.removeChild(toast);
+                    }
+                }, 300);
+            }, 5000);
+        }
+
+        // Handle browser back/forward buttons
+        window.addEventListener('popstate', (event) => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const postId = urlParams.get('post');
+            
+            if (postId) {
+                showBlogPost(parseInt(postId));
+            } else {
+                showPage('home');
+            }
+        });
+    </script>
+</body>
+</html>
