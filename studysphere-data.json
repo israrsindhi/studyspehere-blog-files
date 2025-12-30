@@ -2,9 +2,331 @@
   "siteInfo": {
     "name": "StudySphere Pro",
     "description": "Advanced learning platform for students and professionals",
-    "version": "2.0.0",
-    "contactEmail": "support@studysphere.pro"
+    "version": "2.1.0",
+    "contactEmail": "support@studysphere.pro",
+    "logo": "🧠",
+    "coverImages": {
+      "hero": "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1600&h=900&fit=crop",
+      "defaultArticle": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=400&fit=crop",
+      "categories": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1600&h=600&fit=crop"
+    }
   },
+  
+  "authors": [
+    {
+      "id": 1,
+      "slug": "elena-rodriguez",
+      "name": "Dr. Elena Rodriguez",
+      "avatar": "ER",
+      "title": "Quantum Computing Researcher",
+      "bio": "Quantum Computing Researcher at MIT with 10+ years of experience. Published over 50 papers in quantum algorithms and holds 3 patents in quantum cryptography.",
+      "education": "PhD in Quantum Physics, Stanford University",
+      "expertise": ["Quantum Computing", "Quantum Algorithms", "Cryptography"],
+      "experience": "15 years",
+      "articlesCount": 24,
+      "featured": true,
+      "social": {
+        "twitter": "@elena_qc",
+        "linkedin": "elena-rodriguez-mit",
+        "website": "https://erodriguez.mit.edu"
+      },
+      "coverImage": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=400&fit=crop"
+    },
+    {
+      "id": 2,
+      "slug": "michael-chen",
+      "name": "Dr. Michael Chen",
+      "avatar": "MC",
+      "title": "AI Research Lead",
+      "bio": "AI Research Lead at Google Brain with expertise in deep learning and neural network architectures. Contributed to TensorFlow and PyTorch development.",
+      "education": "PhD in Computer Science, Carnegie Mellon University",
+      "expertise": ["Deep Learning", "Neural Networks", "Machine Learning"],
+      "experience": "12 years",
+      "articlesCount": 32,
+      "featured": true,
+      "social": {
+        "twitter": "@michael_dl",
+        "github": "mchen-ai",
+        "website": "https://mchen.ai"
+      },
+      "coverImage": "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&h=400&fit=crop"
+    },
+    {
+      "id": 3,
+      "slug": "sarah-johnson",
+      "name": "Dr. Sarah Johnson",
+      "avatar": "SJ",
+      "title": "Neuroscience Professor",
+      "bio": "Neuroscience professor and author of multiple biochemistry textbooks. Research focuses on neurotransmitter systems and neurological disorders.",
+      "education": "PhD in Neuroscience, Harvard University",
+      "expertise": ["Neuroscience", "Biochemistry", "Neuropharmacology"],
+      "experience": "18 years",
+      "articlesCount": 19,
+      "featured": true,
+      "social": {
+        "twitter": "@sarah_neuro",
+        "linkedin": "sarah-johnson-neuro"
+      },
+      "coverImage": "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=400&fit=crop"
+    },
+    {
+      "id": 4,
+      "slug": "robert-williams",
+      "name": "Prof. Robert Williams",
+      "avatar": "RW",
+      "title": "Mathematics Professor",
+      "bio": "Mathematics professor specializing in applied mathematics for AI systems. Author of 'Calculus for Machine Learning' textbook.",
+      "education": "PhD in Applied Mathematics, Princeton University",
+      "expertise": ["Calculus", "Linear Algebra", "Optimization"],
+      "experience": "20 years",
+      "articlesCount": 28,
+      "featured": true,
+      "social": {
+        "website": "https://rwilliams.math.edu"
+      },
+      "coverImage": "https://images.unsplash.com/photo-1509228468518-180dd4864904?w=800&h=400&fit=crop"
+    },
+    {
+      "id": 5,
+      "slug": "alex-thompson",
+      "name": "Alex Thompson",
+      "avatar": "AT",
+      "title": "Blockchain Developer",
+      "bio": "Blockchain developer and consultant with expertise in decentralized systems. Contributed to Ethereum and Polkadot ecosystems.",
+      "education": "MSc in Computer Science, ETH Zurich",
+      "expertise": ["Blockchain", "Smart Contracts", "DeFi"],
+      "experience": "8 years",
+      "articlesCount": 15,
+      "featured": false,
+      "social": {
+        "twitter": "@alex_blockchain",
+        "github": "alex-thompson-bc"
+      },
+      "coverImage": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&h=400&fit=crop"
+    },
+    {
+      "id": 6,
+      "slug": "james-wilson",
+      "name": "Dr. James Wilson",
+      "avatar": "JW",
+      "title": "Geneticist",
+      "bio": "Geneticist leading research in CRISPR applications at Stanford University. Focus on gene therapy and ethical implications of genetic engineering.",
+      "education": "PhD in Genetics, Cambridge University",
+      "expertise": ["Genetics", "CRISPR", "Gene Therapy"],
+      "experience": "14 years",
+      "articlesCount": 21,
+      "featured": true,
+      "social": {
+        "twitter": "@james_genetics",
+        "website": "https://jwilson.stanford.edu"
+      },
+      "coverImage": "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&h=400&fit=crop"
+    }
+  ],
+  
+  "subjects": [
+    {
+      "id": 1,
+      "name": "Computer Science",
+      "slug": "computer-science",
+      "description": "Study of algorithms, data structures, programming languages, and software engineering principles",
+      "icon": "laptop-code",
+      "color": "#7C3AED",
+      "coverImage": "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=800&h=400&fit=crop",
+      "totalArticles": 156,
+      "popularity": 95,
+      "subcategories": [
+        "Algorithms",
+        "Data Structures",
+        "Web Development",
+        "Databases",
+        "Cybersecurity",
+        "Operating Systems"
+      ],
+      "topics": [
+        "Programming Languages",
+        "Software Engineering",
+        "Computer Architecture",
+        "Networks",
+        "Artificial Intelligence"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Artificial Intelligence",
+      "slug": "artificial-intelligence",
+      "description": "Development of intelligent machines that can perform tasks requiring human intelligence",
+      "icon": "robot",
+      "color": "#10B981",
+      "coverImage": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&h=400&fit=crop",
+      "totalArticles": 89,
+      "popularity": 88,
+      "subcategories": [
+        "Machine Learning",
+        "Deep Learning",
+        "Natural Language Processing",
+        "Computer Vision",
+        "Reinforcement Learning"
+      ],
+      "topics": [
+        "Neural Networks",
+        "AI Ethics",
+        "Robotics",
+        "Expert Systems",
+        "Cognitive Computing"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Mathematics",
+      "slug": "mathematics",
+      "description": "Study of numbers, quantities, shapes, and patterns using logical reasoning and abstraction",
+      "icon": "calculator",
+      "color": "#3B82F6",
+      "coverImage": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=400&fit=crop",
+      "totalArticles": 142,
+      "popularity": 82,
+      "subcategories": [
+        "Calculus",
+        "Linear Algebra",
+        "Statistics",
+        "Discrete Mathematics",
+        "Number Theory"
+      ],
+      "topics": [
+        "Proof Techniques",
+        "Mathematical Logic",
+        "Geometry",
+        "Topology",
+        "Differential Equations"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Physics",
+      "slug": "physics",
+      "description": "Study of matter, energy, and the fundamental forces of the universe",
+      "icon": "atom",
+      "color": "#EF4444",
+      "coverImage": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=800&h=400&fit=crop",
+      "totalArticles": 78,
+      "popularity": 75,
+      "subcategories": [
+        "Quantum Mechanics",
+        "Classical Mechanics",
+        "Thermodynamics",
+        "Electromagnetism",
+        "Astrophysics"
+      ],
+      "topics": [
+        "Relativity",
+        "Particle Physics",
+        "Optics",
+        "Acoustics",
+        "Nuclear Physics"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Biology",
+      "slug": "biology",
+      "description": "Study of living organisms and their interactions with each other and the environment",
+      "icon": "dna",
+      "color": "#F59E0B",
+      "coverImage": "https://images.unsplash.com/photo-1530026405189-6b5d6c6c0c0e?w=800&h=400&fit=crop",
+      "totalArticles": 103,
+      "popularity": 79,
+      "subcategories": [
+        "Genetics",
+        "Molecular Biology",
+        "Ecology",
+        "Evolutionary Biology",
+        "Microbiology"
+      ],
+      "topics": [
+        "Cell Biology",
+        "Biochemistry",
+        "Physiology",
+        "Zoology",
+        "Botany"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Chemistry",
+      "slug": "chemistry",
+      "description": "Study of matter, its properties, composition, and the changes it undergoes",
+      "icon": "flask",
+      "color": "#8B5CF6",
+      "coverImage": "https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?w=800&h=400&fit=crop",
+      "totalArticles": 67,
+      "popularity": 71,
+      "subcategories": [
+        "Organic Chemistry",
+        "Inorganic Chemistry",
+        "Physical Chemistry",
+        "Analytical Chemistry",
+        "Biochemistry"
+      ],
+      "topics": [
+        "Chemical Reactions",
+        "Periodic Table",
+        "Chemical Bonding",
+        "Thermochemistry",
+        "Electrochemistry"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Engineering",
+      "slug": "engineering",
+      "description": "Application of scientific principles to design and build structures, machines, and systems",
+      "icon": "cogs",
+      "color": "#06B6D4",
+      "coverImage": "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&h=400&fit=crop",
+      "totalArticles": 94,
+      "popularity": 84,
+      "subcategories": [
+        "Electrical Engineering",
+        "Mechanical Engineering",
+        "Civil Engineering",
+        "Chemical Engineering",
+        "Computer Engineering"
+      ],
+      "topics": [
+        "Materials Science",
+        "Thermodynamics",
+        "Circuit Design",
+        "Structural Analysis",
+        "Control Systems"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Medicine",
+      "slug": "medicine",
+      "description": "Science and practice of diagnosing, treating, and preventing disease and injury",
+      "icon": "stethoscope",
+      "color": "#EC4899",
+      "coverImage": "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=400&fit=crop",
+      "totalArticles": 112,
+      "popularity": 91,
+      "subcategories": [
+        "Anatomy",
+        "Physiology",
+        "Pharmacology",
+        "Pathology",
+        "Immunology"
+      ],
+      "topics": [
+        "Medical Diagnostics",
+        "Treatment Methods",
+        "Public Health",
+        "Medical Ethics",
+        "Healthcare Systems"
+      ]
+    }
+  ],
   
   "articles": [
     {
@@ -13,14 +335,9 @@
       "title": "Quantum Computing Fundamentals",
       "excerpt": "Discover the principles of quantum computing and how it's revolutionizing modern technology.",
       "content": "<h2>The Quantum Revolution</h2><p>Quantum computing represents a paradigm shift in computational power, leveraging quantum mechanical phenomena to solve problems that are intractable for classical computers.</p><h2>Quantum Bits (Qubits)</h2><p>Unlike classical bits that can be either 0 or 1, qubits can exist in superposition, representing both states simultaneously. This property enables quantum computers to process vast amounts of information in parallel.</p><h2>Applications and Implications</h2><p>Quantum computing has potential applications in cryptography, drug discovery, optimization problems, and artificial intelligence. Understanding these fundamentals is crucial for the next generation of computer scientists.</p>",
-      "category": "Computer Science",
+      "subject": "Computer Science",
       "subcategory": "Quantum Computing",
-      "author": {
-        "id": 1,
-        "name": "Dr. Elena Rodriguez",
-        "avatar": "ER",
-        "bio": "Quantum Computing Researcher at MIT with 10+ years of experience."
-      },
+      "authorId": 1,
       "date": "2023-11-15",
       "updated": "2023-11-20",
       "readTime": 12,
@@ -28,9 +345,23 @@
       "likes": 189,
       "commentsCount": 34,
       "difficulty": "Intermediate",
-      "tags": ["quantum", "computing", "technology", "physics"],
+      "tags": ["quantum", "computing", "technology", "physics", "algorithms"],
+      "coverImage": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=400&fit=crop",
       "icon": "atom",
-      "featured": true
+      "featured": true,
+      "prerequisites": ["Basic programming", "Linear algebra"],
+      "resources": [
+        {
+          "type": "video",
+          "title": "Introduction to Quantum Computing",
+          "url": "https://youtube.com/watch?v=example1"
+        },
+        {
+          "type": "pdf",
+          "title": "Quantum Algorithms PDF",
+          "url": "/resources/quantum-algorithms.pdf"
+        }
+      ]
     },
     {
       "id": 2,
@@ -38,14 +369,9 @@
       "title": "Neural Networks: From Theory to Practice",
       "excerpt": "A comprehensive guide to understanding and implementing neural networks in real-world applications.",
       "content": "<h2>Introduction to Neural Networks</h2><p>Neural networks are computational models inspired by the human brain's neural structure. They consist of interconnected nodes (neurons) organized in layers that process information.</p><h2>Architecture and Training</h2><p>Key components include input layers, hidden layers, and output layers. Training involves forward propagation, error calculation, and backpropagation to adjust weights.</p><h2>Practical Implementation</h2><p>Modern frameworks like TensorFlow and PyTorch have democratized neural network implementation. Understanding both theory and practice is essential for effective AI development.</p>",
-      "category": "Artificial Intelligence",
+      "subject": "Artificial Intelligence",
       "subcategory": "Deep Learning",
-      "author": {
-        "id": 2,
-        "name": "Dr. Michael Chen",
-        "avatar": "MC",
-        "bio": "AI Research Lead at Google Brain with expertise in deep learning."
-      },
+      "authorId": 2,
       "date": "2023-11-10",
       "updated": "2023-11-12",
       "readTime": 15,
@@ -53,9 +379,18 @@
       "likes": 245,
       "commentsCount": 42,
       "difficulty": "Advanced",
-      "tags": ["ai", "neural networks", "machine learning", "deep learning"],
+      "tags": ["ai", "neural networks", "machine learning", "deep learning", "python"],
+      "coverImage": "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&h=400&fit=crop",
       "icon": "brain",
-      "featured": true
+      "featured": true,
+      "prerequisites": ["Python basics", "Calculus", "Linear algebra"],
+      "resources": [
+        {
+          "type": "code",
+          "title": "Neural Network Implementation",
+          "url": "https://github.com/studysphere/nn-example"
+        }
+      ]
     },
     {
       "id": 3,
@@ -63,14 +398,9 @@
       "title": "Biochemistry of Neurotransmitters",
       "excerpt": "Explore the chemical messengers of the brain and their role in neurological function and disorders.",
       "content": "<h2>Understanding Neurotransmitters</h2><p>Neurotransmitters are chemical substances that transmit signals across synapses between neurons. They play crucial roles in mood regulation, cognition, and motor control.</p><h2>Major Neurotransmitter Systems</h2><p>Key neurotransmitters include dopamine (reward and motivation), serotonin (mood regulation), GABA (inhibition), and glutamate (excitation). Each system has specific receptors and metabolic pathways.</p><h2>Clinical Implications</h2><p>Imbalances in neurotransmitter systems are associated with various neurological and psychiatric disorders, including depression, anxiety, Parkinson's disease, and schizophrenia.</p>",
-      "category": "Biochemistry",
+      "subject": "Biology",
       "subcategory": "Neuroscience",
-      "author": {
-        "id": 3,
-        "name": "Dr. Sarah Johnson",
-        "avatar": "SJ",
-        "bio": "Neuroscience professor and author of multiple biochemistry textbooks."
-      },
+      "authorId": 3,
       "date": "2023-11-05",
       "updated": "2023-11-08",
       "readTime": 10,
@@ -78,9 +408,11 @@
       "likes": 167,
       "commentsCount": 28,
       "difficulty": "Intermediate",
-      "tags": ["biochemistry", "neuroscience", "neurotransmitters", "biology"],
+      "tags": ["biochemistry", "neuroscience", "neurotransmitters", "biology", "medicine"],
+      "coverImage": "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=400&fit=crop",
       "icon": "flask",
-      "featured": false
+      "featured": false,
+      "prerequisites": ["Basic biology", "Chemistry fundamentals"]
     },
     {
       "id": 4,
@@ -88,14 +420,9 @@
       "title": "Calculus in Machine Learning",
       "excerpt": "How differential calculus powers optimization algorithms in modern machine learning models.",
       "content": "<h2>The Role of Calculus in ML</h2><p>Calculus provides the mathematical foundation for training machine learning models through optimization algorithms like gradient descent.</p><h2>Derivatives and Gradients</h2><p>Partial derivatives and gradients measure how loss functions change with respect to model parameters, enabling efficient parameter updates during training.</p><h2>Advanced Optimization</h2><p>Advanced optimization techniques like Adam, RMSProp, and momentum methods build upon fundamental calculus concepts to accelerate convergence and improve model performance.</p>",
-      "category": "Mathematics",
+      "subject": "Mathematics",
       "subcategory": "Calculus",
-      "author": {
-        "id": 4,
-        "name": "Prof. Robert Williams",
-        "avatar": "RW",
-        "bio": "Mathematics professor specializing in applied mathematics for AI systems."
-      },
+      "authorId": 4,
       "date": "2023-11-01",
       "updated": "2023-11-03",
       "readTime": 14,
@@ -103,9 +430,11 @@
       "likes": 198,
       "commentsCount": 31,
       "difficulty": "Intermediate",
-      "tags": ["calculus", "machine learning", "mathematics", "optimization"],
+      "tags": ["calculus", "machine learning", "mathematics", "optimization", "gradient descent"],
+      "coverImage": "https://images.unsplash.com/photo-1509228468518-180dd4864904?w=800&h=400&fit=crop",
       "icon": "calculator",
-      "featured": true
+      "featured": true,
+      "prerequisites": ["Basic calculus", "Linear algebra"]
     },
     {
       "id": 5,
@@ -113,14 +442,9 @@
       "title": "Blockchain Technology Explained",
       "excerpt": "Demystifying blockchain technology, cryptocurrencies, and their applications beyond finance.",
       "content": "<h2>Blockchain Fundamentals</h2><p>Blockchain is a distributed ledger technology that enables secure, transparent, and tamper-proof record-keeping through cryptographic principles.</p><h2>Consensus Mechanisms</h2><p>Different consensus algorithms like Proof of Work (PoW) and Proof of Stake (PoS) ensure network security and validate transactions without central authority.</p><h2>Beyond Cryptocurrency</h2><p>Blockchain applications extend to supply chain management, digital identity, voting systems, smart contracts, and decentralized applications (dApps).</p>",
-      "category": "Computer Science",
+      "subject": "Computer Science",
       "subcategory": "Blockchain",
-      "author": {
-        "id": 5,
-        "name": "Alex Thompson",
-        "avatar": "AT",
-        "bio": "Blockchain developer and consultant with expertise in decentralized systems."
-      },
+      "authorId": 5,
       "date": "2023-10-28",
       "updated": "2023-10-30",
       "readTime": 11,
@@ -128,9 +452,11 @@
       "likes": 213,
       "commentsCount": 39,
       "difficulty": "Beginner",
-      "tags": ["blockchain", "cryptocurrency", "technology", "finance"],
+      "tags": ["blockchain", "cryptocurrency", "technology", "finance", "security"],
+      "coverImage": "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&h=400&fit=crop",
       "icon": "link",
-      "featured": false
+      "featured": false,
+      "prerequisites": ["Basic computer science"]
     },
     {
       "id": 6,
@@ -138,14 +464,9 @@
       "title": "Genetic Engineering Advances",
       "excerpt": "Latest breakthroughs in genetic engineering and CRISPR technology revolutionizing medicine and agriculture.",
       "content": "<h2>CRISPR-Cas9 Revolution</h2><p>CRISPR-Cas9 has democratized genetic engineering, enabling precise, efficient, and affordable genome editing across organisms.</p><h2>Therapeutic Applications</h2><p>Gene editing holds promise for treating genetic disorders, cancer therapies, and developing personalized medicine approaches.</p><h2>Ethical Considerations</h2><p>Advances in genetic engineering raise important ethical questions about germline editing, biodiversity, and equitable access to technologies.</p>",
-      "category": "Genetics",
+      "subject": "Biology",
       "subcategory": "Genetic Engineering",
-      "author": {
-        "id": 6,
-        "name": "Dr. James Wilson",
-        "avatar": "JW",
-        "bio": "Geneticist leading research in CRISPR applications at Stanford University."
-      },
+      "authorId": 6,
       "date": "2023-10-25",
       "updated": "2023-10-27",
       "readTime": 13,
@@ -153,104 +474,55 @@
       "likes": 176,
       "commentsCount": 45,
       "difficulty": "Advanced",
-      "tags": ["genetics", "crispr", "biology", "medicine"],
+      "tags": ["genetics", "crispr", "biology", "medicine", "biotechnology"],
+      "coverImage": "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&h=400&fit=crop",
       "icon": "dna",
-      "featured": true
+      "featured": true,
+      "prerequisites": ["Molecular biology", "Genetics basics"]
     },
     {
       "id": 7,
-      "slug": "data-structures-algorithms",
-      "title": "Essential Data Structures & Algorithms",
-      "excerpt": "Master the fundamental data structures and algorithms every programmer should know.",
-      "content": "<h2>Why Data Structures Matter</h2><p>Data structures organize and store data efficiently, while algorithms provide methods to manipulate that data. Together, they form the backbone of computer science.</p><h2>Key Data Structures</h2><p>Arrays, linked lists, stacks, queues, trees, and graphs each have specific use cases and performance characteristics. Choosing the right structure is crucial for optimal performance.</p><h2>Algorithm Analysis</h2><p>Big O notation helps analyze algorithm efficiency in terms of time and space complexity. Understanding these concepts enables better problem-solving decisions.</p>",
-      "category": "Computer Science",
-      "subcategory": "Algorithms",
-      "author": {
-        "id": 7,
-        "name": "Dr. Lisa Wang",
-        "avatar": "LW",
-        "bio": "Computer Science professor and algorithm design expert."
-      },
+      "slug": "organic-chemistry-reactions",
+      "title": "Organic Chemistry: Essential Reactions",
+      "excerpt": "Master the fundamental organic chemistry reactions every chemistry student needs to know.",
+      "content": "<h2>Understanding Organic Reactions</h2><p>Organic reactions involve the transformation of organic compounds through breaking and forming of covalent bonds.</p><h2>Key Reaction Types</h2><p>Substitution, elimination, addition, and rearrangement reactions form the foundation of organic synthesis and biological processes.</p><h2>Synthetic Applications</h2><p>These reactions enable the synthesis of pharmaceuticals, polymers, and complex natural products with precise control over stereochemistry.</p>",
+      "subject": "Chemistry",
+      "subcategory": "Organic Chemistry",
+      "authorId": 1,
       "date": "2023-10-20",
       "updated": "2023-10-22",
       "readTime": 18,
-      "views": 4120,
-      "likes": 312,
-      "commentsCount": 67,
-      "difficulty": "Intermediate",
-      "tags": ["algorithms", "data structures", "programming", "computer science"],
-      "icon": "code",
-      "featured": true
-    },
-    {
-      "id": 8,
-      "slug": "organic-chemistry-basics",
-      "title": "Organic Chemistry: Fundamentals & Reactions",
-      "excerpt": "Understanding carbon-based compounds and their transformations in chemical reactions.",
-      "content": "<h2>The Carbon Atom</h2><p>Carbon's unique ability to form four covalent bonds enables the vast diversity of organic compounds found in nature and synthesized in laboratories.</p><h2>Functional Groups</h2><p>Alcohols, aldehydes, ketones, carboxylic acids, and amines each have distinct properties and reactivities that determine compound behavior.</p><h2>Reaction Mechanisms</h2><p>Understanding electron movement in substitution, elimination, and addition reactions is key to predicting organic reaction outcomes.</p>",
-      "category": "Chemistry",
-      "subcategory": "Organic Chemistry",
-      "author": {
-        "id": 8,
-        "name": "Dr. Ahmed Hassan",
-        "avatar": "AH",
-        "bio": "Organic chemistry researcher with focus on synthetic methodologies."
-      },
-      "date": "2023-10-18",
-      "updated": "2023-10-19",
-      "readTime": 16,
       "views": 1870,
       "likes": 145,
       "commentsCount": 23,
       "difficulty": "Advanced",
-      "tags": ["chemistry", "organic", "reactions", "laboratory"],
+      "tags": ["chemistry", "organic", "reactions", "synthesis", "laboratory"],
+      "coverImage": "https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?w=800&h=400&fit=crop",
       "icon": "vial",
-      "featured": false
-    }
-  ],
-  
-  "categories": [
-    {
-      "name": "Computer Science",
-      "count": 42,
-      "color": "#7C3AED",
-      "icon": "laptop-code"
+      "featured": false,
+      "prerequisites": ["Basic chemistry", "Molecular structure"]
     },
     {
-      "name": "Artificial Intelligence",
-      "count": 35,
-      "color": "#10B981",
-      "icon": "robot"
-    },
-    {
-      "name": "Mathematics",
-      "count": 38,
-      "color": "#3B82F6",
-      "icon": "calculator"
-    },
-    {
-      "name": "Physics",
-      "count": 28,
-      "color": "#EF4444",
-      "icon": "atom"
-    },
-    {
-      "name": "Biology",
-      "count": 31,
-      "color": "#F59E0B",
-      "icon": "dna"
-    },
-    {
-      "name": "Chemistry",
-      "count": 27,
-      "color": "#8B5CF6",
-      "icon": "flask"
-    },
-    {
-      "name": "Engineering",
-      "count": 33,
-      "color": "#06B6D4",
-      "icon": "cogs"
+      "id": 8,
+      "slug": "machine-learning-algorithms",
+      "title": "Machine Learning Algorithms Explained",
+      "excerpt": "Comprehensive guide to the most important machine learning algorithms and their applications.",
+      "content": "<h2>Supervised Learning</h2><p>Algorithms learn from labeled training data to make predictions on unseen data. Includes linear regression, decision trees, and support vector machines.</p><h2>Unsupervised Learning</h2><p>Algorithms find patterns in unlabeled data through clustering and dimensionality reduction techniques like K-means and PCA.</p><h2>Reinforcement Learning</h2><p>Agents learn optimal behavior through trial and error interactions with an environment, receiving rewards for desirable actions.</p>",
+      "subject": "Artificial Intelligence",
+      "subcategory": "Machine Learning",
+      "authorId": 2,
+      "date": "2023-10-18",
+      "updated": "2023-10-19",
+      "readTime": 16,
+      "views": 3120,
+      "likes": 267,
+      "commentsCount": 38,
+      "difficulty": "Intermediate",
+      "tags": ["machine learning", "algorithms", "ai", "data science", "python"],
+      "coverImage": "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&h=400&fit=crop",
+      "icon": "brain",
+      "featured": true,
+      "prerequisites": ["Python", "Statistics", "Linear algebra"]
     }
   ],
   
@@ -278,22 +550,6 @@
       "avatar": "DP",
       "date": "2023-11-12",
       "content": "The neural networks guide is comprehensive yet concise. The code examples would be a valuable addition for practical implementation."
-    },
-    {
-      "id": 4,
-      "articleId": 4,
-      "name": "Maria Garcia",
-      "avatar": "MG",
-      "date": "2023-11-05",
-      "content": "Finally, a clear explanation of how calculus applies to machine learning! The gradient descent examples were perfect."
-    },
-    {
-      "id": 5,
-      "articleId": 6,
-      "name": "Thomas Chen",
-      "avatar": "TC",
-      "date": "2023-10-30",
-      "content": "The ethical considerations section raises important questions about the future of genetic engineering. Well balanced perspective."
     }
   ],
   
@@ -302,8 +558,16 @@
     "Implement spaced repetition with apps like Anki to optimize long-term retention.",
     "Create concept maps to visualize relationships between complex ideas.",
     "Teach what you learn to others - it reinforces your understanding by 90%.",
-    "Practice active recall instead of passive rereading for better memory consolidation.",
-    "Study in focused 90-minute blocks with 20-minute breaks for optimal concentration.",
-    "Connect new information to existing knowledge through analogies and examples."
-  ]
+    "Practice active recall instead of passive rereading for better memory consolidation."
+  ],
+  
+  "stats": {
+    "totalArticles": 245,
+    "totalAuthors": 42,
+    "totalSubjects": 8,
+    "totalComments": 1567,
+    "monthlyVisitors": 25400,
+    "averageReadTime": "12 min",
+    "mostPopularSubject": "Computer Science"
+  }
 }
