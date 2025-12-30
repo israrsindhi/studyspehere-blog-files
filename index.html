@@ -3,71 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudySphere Pro | Advanced Study Platform</title>
+    <title>StudySphere | Dynamic Study Notes & Articles</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         :root {
-            --primary: #7C3AED;
-            --secondary: #10B981;
-            --accent: #F59E0B;
-            --dark: #1F2937;
-            --darker: #111827;
-            --light: #F9FAFB;
-            --gray: #6B7280;
-            --light-gray: #E5E7EB;
-            --card-bg: #FFFFFF;
-            --danger: #EF4444;
-            --success: #10B981;
-            --info: #3B82F6;
-            --border-radius: 16px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
-        }
-
-        .dark-theme {
-            --primary: #A78BFA;
-            --secondary: #34D399;
-            --accent: #FBBF24;
-            --dark: #F9FAFB;
-            --darker: #E5E7EB;
-            --light: #111827;
-            --gray: #9CA3AF;
-            --light-gray: #374151;
-            --card-bg: #1F2937;
-            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-            --shadow-lg: 0 20px 40px -10px rgba(0, 0, 0, 0.4);
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --success: #4bb543;
+            --warning: #ff9e00;
+            --danger: #ff3860;
         }
 
         body {
-            background-color: var(--light);
+            background-color: #f5f7ff;
             color: var(--dark);
             line-height: 1.6;
-            transition: var(--transition);
-            min-height: 100vh;
+            transition: all 0.3s ease;
         }
 
         .container {
             width: 100%;
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
-        /* Header */
+        /* Header Styles */
         header {
-            background-color: var(--card-bg);
-            box-shadow: var(--shadow);
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             position: sticky;
             top: 0;
-            z-index: 1000;
+            z-index: 100;
         }
 
         .header-content {
@@ -80,59 +59,48 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             font-size: 1.8rem;
-            font-weight: 800;
+            font-weight: 700;
             color: var(--primary);
-            text-decoration: none;
         }
 
         .logo i {
-            color: var(--secondary);
-            font-size: 2.2rem;
-        }
-
-        .logo span {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            color: var(--accent);
         }
 
         nav ul {
             display: flex;
             list-style: none;
             gap: 30px;
-            align-items: center;
         }
 
         nav a {
             text-decoration: none;
             color: var(--dark);
             font-weight: 600;
-            transition: var(--transition);
-            padding: 8px 16px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            transition: color 0.3s;
+            padding: 5px 0;
+            position: relative;
         }
 
         nav a:hover {
-            background-color: rgba(124, 58, 237, 0.1);
             color: var(--primary);
         }
 
         nav a.active {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+            color: var(--primary);
         }
 
-        .header-controls {
-            display: flex;
-            align-items: center;
-            gap: 20px;
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary);
+            border-radius: 2px;
         }
 
         .search-bar {
@@ -140,123 +108,93 @@
             align-items: center;
             background-color: var(--light-gray);
             border-radius: 50px;
-            padding: 12px 24px;
+            padding: 10px 20px;
             width: 300px;
-            transition: var(--transition);
-        }
-
-        .search-bar:focus-within {
-            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
         }
 
         .search-bar input {
             border: none;
             background: transparent;
             width: 100%;
-            margin-left: 12px;
+            margin-left: 10px;
             outline: none;
             font-size: 0.95rem;
-            color: var(--dark);
-        }
-
-        .theme-toggle, .mobile-menu-btn {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--dark);
-            cursor: pointer;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-        }
-
-        .theme-toggle:hover, .mobile-menu-btn:hover {
-            background-color: var(--light-gray);
         }
 
         .mobile-menu-btn {
             display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary);
         }
 
-        /* Hero */
+        /* Hero Section */
         .hero {
-            padding: 100px 0;
-            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%);
-            border-radius: 0 0 40px 40px;
-            margin-bottom: 60px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%237C3AED' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            opacity: 0.3;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
+            padding: 80px 0;
+            background: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
+            color: white;
             text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 24px;
-            line-height: 1.2;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            color: var(--gray);
+            border-radius: 0 0 30px 30px;
             margin-bottom: 40px;
         }
 
-        .hero-stats {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin-top: 60px;
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
         }
 
-        .stat {
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Loading State */
+        .loading {
             text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--primary);
-            display: block;
-        }
-
-        .stat-label {
+            padding: 40px;
+            font-size: 1.2rem;
             color: var(--gray);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        }
+
+        .loading i {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         /* Main Content */
         .main-content {
             display: flex;
-            gap: 40px;
-            margin-bottom: 80px;
+            gap: 30px;
+            margin-bottom: 60px;
         }
 
         .articles-section {
@@ -265,128 +203,91 @@
 
         .sidebar {
             flex: 1;
-            position: sticky;
-            top: 100px;
-            height: fit-content;
         }
 
         .section-title {
-            font-size: 2rem;
-            margin-bottom: 30px;
-            color: var(--dark);
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: var(--secondary);
             position: relative;
-            display: inline-block;
+            padding-bottom: 10px;
         }
 
         .section-title::after {
             content: '';
             position: absolute;
-            bottom: -8px;
+            bottom: 0;
             left: 0;
             width: 60px;
             height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            background-color: var(--accent);
             border-radius: 2px;
         }
 
         /* Articles Grid */
         .articles-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 30px;
             margin-bottom: 40px;
         }
 
         .article-card {
-            background-color: var(--card-bg);
-            border-radius: var(--border-radius);
+            background-color: white;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
             cursor: pointer;
-            border: 1px solid var(--light-gray);
         }
 
         .article-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--primary);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         }
 
         .article-image {
-            height: 200px;
+            height: 180px;
             width: 100%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background-color: var(--light-gray);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 4rem;
-            position: relative;
+            color: var(--gray);
+            font-size: 3rem;
             overflow: hidden;
         }
 
-        .article-image::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.1));
+        .article-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .article-content {
-            padding: 30px;
-        }
-
-        .article-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
+            padding: 25px;
         }
 
         .article-category {
             display: inline-block;
-            background: rgba(124, 58, 237, 0.1);
+            background-color: rgba(67, 97, 238, 0.1);
             color: var(--primary);
-            padding: 6px 16px;
+            padding: 5px 12px;
             border-radius: 50px;
             font-size: 0.8rem;
             font-weight: 600;
-        }
-
-        .article-bookmark {
-            background: none;
-            border: none;
-            color: var(--gray);
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: var(--transition);
-            padding: 5px;
-            border-radius: 6px;
-        }
-
-        .article-bookmark:hover {
-            color: var(--accent);
-            background: rgba(245, 158, 11, 0.1);
-        }
-
-        .article-bookmark.active {
-            color: var(--accent);
+            margin-bottom: 12px;
         }
 
         .article-title {
-            font-size: 1.5rem;
-            margin-bottom: 12px;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
             line-height: 1.4;
-            color: var(--dark);
         }
 
         .article-excerpt {
             color: var(--gray);
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             display: -webkit-box;
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
@@ -396,7 +297,6 @@
         .article-meta {
             display: flex;
             justify-content: space-between;
-            align-items: center;
             color: var(--gray);
             font-size: 0.9rem;
         }
@@ -404,41 +304,41 @@
         .article-author {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         .author-avatar {
-            width: 36px;
-            height: 36px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background-color: var(--light-gray);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
+            color: var(--primary);
+            font-weight: bold;
         }
 
         /* Blog Post View */
         .blog-post-container {
-            background-color: var(--card-bg);
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            margin-bottom: 40px;
+            background-color: white;
+            border-radius: 15px;
             overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin-bottom: 40px;
+            padding: 0;
         }
 
         .blog-post-header {
-            padding: 50px 50px 30px;
-            background: linear-gradient(135deg, rgba(124, 58, 237, 0.05) 0%, rgba(16, 185, 129, 0.05) 100%);
+            padding: 40px 40px 20px;
         }
 
         .blog-post-title {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            color: var(--dark);
-            line-height: 1.2;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+            line-height: 1.3;
         }
 
         .blog-post-meta {
@@ -446,33 +346,32 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 30px;
-            padding-bottom: 30px;
-            border-bottom: 2px solid var(--light-gray);
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--light-gray);
         }
 
         .blog-post-author {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 15px;
         }
 
         .blog-author-avatar {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background-color: var(--light-gray);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--primary);
+            font-weight: bold;
         }
 
         .blog-author-info h4 {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             margin-bottom: 5px;
-            color: var(--dark);
         }
 
         .blog-author-info p {
@@ -480,441 +379,197 @@
             font-size: 0.9rem;
         }
 
-        .blog-post-actions {
-            display: flex;
-            gap: 15px;
-        }
-
-        .action-btn {
-            background: var(--light-gray);
-            border: none;
-            padding: 12px 20px;
-            border-radius: 12px;
-            color: var(--dark);
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: var(--transition);
-        }
-
-        .action-btn:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .action-btn.success {
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--success);
-        }
-
-        .action-btn.success:hover {
-            background: var(--success);
-            color: white;
+        .blog-post-date {
+            color: var(--gray);
+            font-size: 0.95rem;
         }
 
         .blog-post-image {
             height: 400px;
             width: 100%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 6rem;
+            background-color: var(--light-gray);
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .blog-post-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .blog-post-content {
-            padding: 50px;
+            padding: 0 40px 40px;
             font-size: 1.1rem;
             line-height: 1.8;
         }
 
         .blog-post-content h2 {
-            margin: 40px 0 20px;
-            color: var(--primary);
-            font-size: 2rem;
+            margin: 30px 0 15px;
+            color: var(--secondary);
         }
 
         .blog-post-content p {
-            margin-bottom: 24px;
-            color: var(--dark);
+            margin-bottom: 20px;
         }
 
         .blog-post-content ul, .blog-post-content ol {
-            margin-left: 24px;
-            margin-bottom: 24px;
+            margin-left: 20px;
+            margin-bottom: 20px;
         }
 
-        .blog-post-content li {
-            margin-bottom: 8px;
-            color: var(--dark);
+        .blog-post-footer {
+            padding: 30px 40px;
+            background-color: var(--light-gray);
+            border-top: 1px solid #ddd;
         }
 
-        /* Comments Section */
-        .comments-section {
-            background-color: var(--card-bg);
-            border-radius: var(--border-radius);
-            padding: 40px;
-            margin-bottom: 40px;
-            box-shadow: var(--shadow);
-        }
-
-        .comments-header {
+        .blog-tags {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
-        .comments-count {
-            background: var(--primary);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
+        .blog-tag {
+            background-color: white;
+            padding: 8px 16px;
+            border-radius: 50px;
             font-size: 0.9rem;
-        }
-
-        .comment-form {
-            background: var(--light-gray);
-            padding: 30px;
-            border-radius: var(--border-radius);
-            margin-bottom: 40px;
-        }
-
-        .comment-form h3 {
-            margin-bottom: 20px;
-            color: var(--dark);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--dark);
-            font-weight: 600;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 14px;
-            border: 2px solid transparent;
-            border-radius: 12px;
-            background: var(--card-bg);
-            color: var(--dark);
-            font-size: 1rem;
-            transition: var(--transition);
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
-        }
-
-        .comment-submit {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            padding: 14px 32px;
-            border-radius: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .comment-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(124, 58, 237, 0.3);
-        }
-
-        .comments-list {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-
-        .comment {
-            background: var(--light-gray);
-            padding: 24px;
-            border-radius: var(--border-radius);
-            transition: var(--transition);
-        }
-
-        .comment:hover {
-            transform: translateX(5px);
-        }
-
-        .comment-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-
-        .comment-author {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .comment-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 600;
-        }
-
-        .comment-info h4 {
-            color: var(--dark);
-            margin-bottom: 4px;
-        }
-
-        .comment-date {
             color: var(--gray);
-            font-size: 0.85rem;
+            border: 1px solid #ddd;
         }
 
-        .comment-content {
-            color: var(--dark);
-            line-height: 1.6;
-        }
-
-        /* Sidebar Widgets */
+        /* Sidebar */
         .sidebar-widget {
-            background-color: var(--card-bg);
-            border-radius: var(--border-radius);
-            padding: 30px;
+            background-color: white;
+            border-radius: 12px;
+            padding: 25px;
             margin-bottom: 30px;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--light-gray);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
 
         .widget-title {
             font-size: 1.3rem;
             margin-bottom: 20px;
-            color: var(--dark);
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            color: var(--secondary);
         }
 
-        .widget-title i {
-            color: var(--primary);
-        }
-
-        .categories-list, .recent-posts, .bookmarked-posts {
+        .categories-list, .popular-posts, .recent-posts {
             list-style: none;
         }
 
-        .categories-list li, .recent-posts li, .bookmarked-posts li {
-            padding: 14px 0;
+        .categories-list li, .popular-posts li, .recent-posts li {
+            padding: 12px 0;
             border-bottom: 1px solid var(--light-gray);
         }
 
-        .categories-list li:last-child, .recent-posts li:last-child, .bookmarked-posts li:last-child {
+        .categories-list li:last-child, .popular-posts li:last-child, .recent-posts li:last-child {
             border-bottom: none;
         }
 
-        .categories-list a, .recent-posts a, .bookmarked-posts a {
+        .categories-list a, .popular-posts a, .recent-posts a {
             text-decoration: none;
             color: var(--dark);
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            transition: var(--transition);
-            padding: 8px;
-            border-radius: 8px;
+            transition: color 0.3s;
         }
 
-        .categories-list a:hover, .recent-posts a:hover, .bookmarked-posts a:hover {
-            background-color: rgba(124, 58, 237, 0.1);
+        .categories-list a:hover, .popular-posts a:hover, .recent-posts a:hover {
             color: var(--primary);
-            transform: translateX(5px);
         }
 
         .category-count {
-            background: rgba(124, 58, 237, 0.1);
-            color: var(--primary);
-            padding: 4px 12px;
-            border-radius: 20px;
+            background-color: var(--light-gray);
+            padding: 2px 10px;
+            border-radius: 10px;
             font-size: 0.8rem;
-            font-weight: 600;
         }
 
-        .recent-post, .bookmarked-post {
+        .popular-post, .recent-post {
             display: flex;
             gap: 15px;
             align-items: center;
         }
 
-        .recent-post img, .bookmarked-post img {
+        .popular-post img, .recent-post img {
             width: 60px;
             height: 60px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 8px;
+            object-fit: cover;
+            background-color: var(--light-gray);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 1.5rem;
+            color: var(--gray);
         }
 
-        .recent-post-content h4, .bookmarked-post-content h4 {
+        .popular-post-content h4, .recent-post-content h4 {
             font-size: 0.95rem;
             margin-bottom: 5px;
             line-height: 1.4;
-            color: var(--dark);
         }
 
-        .recent-post-content span, .bookmarked-post-content span {
+        .popular-post-content span, .recent-post-content span {
             font-size: 0.8rem;
             color: var(--gray);
         }
 
-        /* Reading Progress */
-        .reading-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: transparent;
-            z-index: 1001;
-            display: none;
-        }
-
-        .reading-progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
-        /* Bookmarks Page */
-        .bookmarks-page {
-            display: none;
-        }
-
-        .bookmarks-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 60px 40px;
-            color: var(--gray);
-        }
-
-        .empty-state i {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            color: var(--light-gray);
-        }
-
         /* Newsletter */
         .newsletter {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: var(--border-radius);
-            padding: 60px;
+            background: linear-gradient(135deg, #4cc9f0 0%, #4361ee 100%);
+            border-radius: 15px;
+            padding: 40px;
             text-align: center;
             color: white;
             margin-bottom: 60px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .newsletter::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
-            opacity: 0.2;
-        }
-
-        .newsletter-content {
-            position: relative;
-            z-index: 1;
         }
 
         .newsletter h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
+            font-size: 2rem;
+            margin-bottom: 15px;
         }
 
         .newsletter p {
-            font-size: 1.2rem;
+            margin-bottom: 25px;
             opacity: 0.9;
-            margin-bottom: 30px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
         }
 
         .newsletter-form {
             display: flex;
             max-width: 500px;
             margin: 0 auto;
-            background: white;
-            border-radius: 50px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
         .newsletter-form input {
             flex: 1;
-            padding: 20px 30px;
+            padding: 15px 20px;
             border: none;
+            border-radius: 50px 0 0 50px;
             font-size: 1rem;
             outline: none;
-            color: var(--darker);
         }
 
         .newsletter-form button {
-            background: var(--accent);
+            background-color: var(--secondary);
             color: white;
             border: none;
-            padding: 0 40px;
+            padding: 0 30px;
+            border-radius: 0 50px 50px 0;
             font-weight: 600;
             cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            transition: background-color 0.3s;
         }
 
         .newsletter-form button:hover {
-            background: #EAB308;
+            background-color: #2d0a8a;
         }
 
         /* Footer */
         footer {
-            background-color: var(--card-bg);
+            background-color: var(--dark);
             color: white;
-            padding: 80px 0 30px;
-            margin-top: 60px;
-            border-top: 1px solid var(--light-gray);
+            padding: 60px 0 30px;
         }
 
         .footer-content {
@@ -927,7 +582,7 @@
         .footer-column h3 {
             font-size: 1.3rem;
             margin-bottom: 25px;
-            color: var(--dark);
+            color: white;
         }
 
         .footer-column ul {
@@ -939,80 +594,53 @@
         }
 
         .footer-column ul li a {
-            color: var(--gray);
+            color: #b0b7c3;
             text-decoration: none;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            transition: color 0.3s;
         }
 
         .footer-column ul li a:hover {
-            color: var(--primary);
-            transform: translateX(5px);
+            color: white;
         }
 
         .copyright {
             text-align: center;
             padding-top: 30px;
-            border-top: 1px solid var(--light-gray);
-            color: var(--gray);
+            border-top: 1px solid #343a40;
+            color: #b0b7c3;
             font-size: 0.9rem;
         }
 
         /* Back Button */
         .back-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
+            display: inline-block;
             margin-bottom: 30px;
             color: var(--primary);
             text-decoration: none;
             font-weight: 600;
-            padding: 12px 24px;
-            background: var(--light-gray);
-            border-radius: 12px;
-            transition: var(--transition);
+            transition: color 0.3s;
         }
 
         .back-button:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateX(-5px);
-        }
-
-        /* Loading States */
-        .loading {
-            text-align: center;
-            padding: 60px;
-            color: var(--gray);
-        }
-
-        .loading i {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            color: var(--primary);
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            color: var(--secondary);
         }
 
         /* Responsive Design */
-        @media (max-width: 1200px) {
+        @media (max-width: 992px) {
             .main-content {
                 flex-direction: column;
             }
             
-            .sidebar {
-                position: static;
-                width: 100%;
-            }
-            
             .footer-content {
                 grid-template-columns: repeat(2, 1fr);
+            }
+
+            .blog-post-title {
+                font-size: 2rem;
+            }
+
+            .blog-post-image {
+                height: 300px;
             }
         }
 
@@ -1021,75 +649,66 @@
                 flex-wrap: wrap;
             }
             
+            .search-bar {
+                order: 3;
+                width: 100%;
+                margin-top: 20px;
+            }
+            
             nav {
                 display: none;
+            }
+            
+            nav.active {
+                display: block;
                 width: 100%;
                 order: 3;
                 margin-top: 20px;
             }
             
-            nav.active {
-                display: block;
-            }
-            
             nav ul {
                 flex-direction: column;
-                gap: 10px;
-            }
-            
-            .search-bar {
-                width: 100%;
-                order: 2;
-                margin-top: 20px;
-            }
-            
-            .header-controls {
-                width: 100%;
-                justify-content: space-between;
-                order: 1;
+                gap: 15px;
             }
             
             .mobile-menu-btn {
-                display: flex;
+                display: block;
             }
             
             .hero h1 {
                 font-size: 2.5rem;
             }
             
-            .hero-stats {
-                flex-direction: column;
-                gap: 20px;
-            }
-            
-            .articles-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .blog-post-title {
-                font-size: 2.2rem;
-            }
-            
-            .blog-post-meta {
-                flex-direction: column;
-                gap: 20px;
-                align-items: flex-start;
-            }
-            
             .newsletter-form {
                 flex-direction: column;
-                border-radius: var(--border-radius);
             }
             
-            .newsletter-form input,
+            .newsletter-form input {
+                border-radius: 50px;
+                margin-bottom: 15px;
+            }
+            
             .newsletter-form button {
-                width: 100%;
-                border-radius: 0;
-                padding: 20px;
+                border-radius: 50px;
+                padding: 15px;
+            }
+
+            .blog-post-header, .blog-post-content, .blog-post-footer {
+                padding: 30px 20px;
+            }
+
+            .blog-post-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
             }
         }
 
         @media (max-width: 576px) {
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+            
             .footer-content {
                 grid-template-columns: 1fr;
             }
@@ -1101,60 +720,46 @@
             .hero h1 {
                 font-size: 2rem;
             }
-            
-            .blog-post-content {
-                padding: 30px 20px;
+
+            .blog-post-title {
+                font-size: 1.7rem;
             }
-            
-            .comments-section {
-                padding: 20px;
-            }
-            
-            .newsletter {
-                padding: 40px 20px;
+
+            .blog-post-image {
+                height: 200px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Reading Progress Bar -->
-    <div class="reading-progress" id="readingProgress">
-        <div class="reading-progress-bar" id="readingProgressBar"></div>
-    </div>
-
     <!-- Header -->
     <header>
         <div class="container">
             <div class="header-content">
-                <a href="#" class="logo" id="homeLink">
-                    <i class="fas fa-brain"></i>
-                    <span>StudySphere Pro</span>
-                </a>
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>StudySphere</span>
+                </div>
                 
-                <div class="header-controls">
-                    <div class="search-bar">
-                        <i class="fas fa-search"></i>
-                        <input type="text" id="searchInput" placeholder="Search articles...">
-                    </div>
-                    
-                    <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">
-                        <i class="fas fa-moon"></i>
-                    </button>
-                    
-                    <button class="mobile-menu-btn" id="mobileMenuBtn">
-                        <i class="fas fa-bars"></i>
-                    </button>
+                <div class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
                 </div>
                 
                 <nav id="mainNav">
                     <ul>
-                        <li><a href="#" class="active" data-page="home"><i class="fas fa-home"></i> Home</a></li>
-                        <li><a href="#" data-page="bookmarks"><i class="fas fa-bookmark"></i> Bookmarks</a></li>
-                        <li><a href="#" data-page="subjects"><i class="fas fa-folder"></i> Subjects</a></li>
-                        <li><a href="#" data-page="authors"><i class="fas fa-users"></i> Authors</a></li>
-                        <li><a href="#" data-page="about"><i class="fas fa-info-circle"></i> About</a></li>
+                        <li><a href="#" class="active" data-nav="home">Home</a></li>
+                        <li><a href="#" data-nav="notes">Notes</a></li>
+                        <li><a href="#" data-nav="articles">Articles</a></li>
+                        <li><a href="#" data-nav="subjects">Subjects</a></li>
+                        <li><a href="#" data-nav="authors">Authors</a></li>
+                        <li><a href="#" data-nav="about">About</a></li>
                     </ul>
                 </nav>
+                
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search notes and articles...">
+                </div>
             </div>
         </div>
     </header>
@@ -1162,178 +767,99 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <div class="hero-content">
-                <h1>Elevate Your Learning Experience</h1>
-                <p>Access premium study materials, interactive content, and join a community of dedicated learners. Bookmark, comment, and export your favorite articles.</p>
-                <div class="hero-stats">
-                    <div class="stat">
-                        <span class="stat-number" id="totalArticles">0</span>
-                        <span class="stat-label">Articles</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number" id="activeUsers">1.2K</span>
-                        <span class="stat-label">Active Learners</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number" id="studyHours">5.7K</span>
-                        <span class="stat-label">Study Hours</span>
-                    </div>
-                </div>
-            </div>
+            <h1>Master Your Studies with Expert Notes & Articles</h1>
+            <p>Access comprehensive study materials, well-researched articles, and educational resources across all subjects. Join our community of learners and educators.</p>
+            <a href="#" class="cta-button" id="exploreBtn">Explore Resources <i class="fas fa-arrow-right"></i></a>
         </div>
     </section>
 
-    <!-- Main Content Area -->
+    <!-- Main Content -->
     <div class="container">
-        <!-- Home Page -->
-        <div id="homePage">
-            <div class="main-content">
-                <!-- Articles Section -->
-                <section class="articles-section">
-                    <h2 class="section-title">Latest Study Articles</h2>
-                    
-                    <div id="loadingArticles" class="loading">
-                        <i class="fas fa-spinner"></i>
-                        <p>Loading articles from external JSON file...</p>
-                    </div>
-                    
-                    <div id="articlesGrid" class="articles-grid" style="display: none;">
-                        <!-- Articles will be dynamically loaded here -->
-                    </div>
-                    
-                    <div style="text-align: center; margin-top: 30px;">
-                        <button id="loadMoreBtn" class="action-btn" style="display: none;">
-                            <i class="fas fa-plus"></i> Load More Articles
-                        </button>
-                    </div>
-                </section>
+        <!-- Articles Grid View -->
+        <div id="articlesView" class="main-content">
+            <!-- Articles Section -->
+            <section class="articles-section">
+                <h2 class="section-title">Latest Study Articles</h2>
                 
-                <!-- Sidebar -->
-                <aside class="sidebar">
-                    <!-- Categories Widget -->
-                    <div class="sidebar-widget">
-                        <h3 class="widget-title"><i class="fas fa-tags"></i> Categories</h3>
-                        <div id="loadingCategories" class="loading">
-                            <i class="fas fa-spinner"></i>
-                            <p>Loading categories...</p>
-                        </div>
-                        <ul id="categoriesList" class="categories-list" style="display: none;">
-                            <!-- Categories will be dynamically loaded here -->
-                        </ul>
+                <div id="loadingArticles" class="loading">
+                    <i class="fas fa-spinner"></i>
+                    <p>Loading articles...</p>
+                </div>
+                
+                <div id="articlesGrid" class="articles-grid" style="display: none;">
+                    <!-- Articles will be dynamically loaded here -->
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <button id="loadMoreBtn" class="cta-button" style="display: none;">Load More Articles <i class="fas fa-book-open"></i></button>
+                </div>
+            </section>
+            
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <!-- Categories Widget -->
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">Subjects</h3>
+                    <div id="loadingCategories" class="loading">
+                        <i class="fas fa-spinner"></i>
+                        <p>Loading categories...</p>
                     </div>
-                    
-                    <!-- Recent Posts Widget -->
-                    <div class="sidebar-widget">
-                        <h3 class="widget-title"><i class="fas fa-history"></i> Recent Posts</h3>
-                        <div id="loadingRecent" class="loading">
-                            <i class="fas fa-spinner"></i>
-                            <p>Loading recent posts...</p>
-                        </div>
-                        <ul id="recentPosts" class="recent-posts" style="display: none;">
-                            <!-- Recent posts will be dynamically loaded here -->
-                        </ul>
+                    <ul id="categoriesList" class="categories-list" style="display: none;">
+                        <!-- Categories will be dynamically loaded here -->
+                    </ul>
+                </div>
+                
+                <!-- Recent Posts Widget -->
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">Recent Posts</h3>
+                    <div id="loadingRecent" class="loading">
+                        <i class="fas fa-spinner"></i>
+                        <p>Loading recent posts...</p>
                     </div>
-                    
-                    <!-- Bookmarked Posts Widget -->
-                    <div class="sidebar-widget">
-                        <h3 class="widget-title"><i class="fas fa-bookmark"></i> Your Bookmarks</h3>
-                        <div id="loadingBookmarks" class="loading">
-                            <i class="fas fa-spinner"></i>
-                            <p>Loading bookmarks...</p>
-                        </div>
-                        <ul id="bookmarkedPosts" class="bookmarked-posts" style="display: none;">
-                            <!-- Bookmarked posts will be dynamically loaded here -->
-                        </ul>
-                        <div id="emptyBookmarks" class="empty-state" style="display: none;">
-                            <i class="fas fa-bookmark"></i>
-                            <p>No bookmarks yet. Save articles to read later!</p>
-                        </div>
+                    <ul id="recentPosts" class="recent-posts" style="display: none;">
+                        <!-- Recent posts will be dynamically loaded here -->
+                    </ul>
+                </div>
+                
+                <!-- Popular Posts Widget -->
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">Popular Posts</h3>
+                    <div id="loadingPopular" class="loading">
+                        <i class="fas fa-spinner"></i>
+                        <p>Loading popular posts...</p>
                     </div>
-                </aside>
-            </div>
+                    <ul id="popularPosts" class="popular-posts" style="display: none;">
+                        <!-- Popular posts will be dynamically loaded here -->
+                    </ul>
+                </div>
+                
+                <!-- Study Tips Widget -->
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">Study Tip of the Day</h3>
+                    <div style="background-color: rgba(67, 97, 238, 0.1); padding: 20px; border-radius: 10px;">
+                        <p id="studyTip" style="font-style: italic; color: var(--secondary);">"Use the Pomodoro Technique: Study for 25 minutes, then take a 5-minute break. This helps maintain focus and prevents burnout."</p>
+                    </div>
+                </div>
+            </aside>
         </div>
 
-        <!-- Blog Post View -->
+        <!-- Single Blog Post View -->
         <div id="blogPostView" style="display: none;">
-            <a href="#" class="back-button" id="backToArticles">
-                <i class="fas fa-arrow-left"></i> Back to Articles
-            </a>
+            <a href="#" class="back-button" id="backToArticles"><i class="fas fa-arrow-left"></i> Back to All Articles</a>
             
             <div id="blogPostContainer" class="blog-post-container">
                 <!-- Blog post will be dynamically loaded here -->
-            </div>
-            
-            <!-- Comments Section -->
-            <div class="comments-section" id="commentsSection">
-                <div class="comments-header">
-                    <h2 class="section-title">Comments</h2>
-                    <span class="comments-count" id="commentsCount">0 Comments</span>
-                </div>
-                
-                <!-- Comment Form -->
-                <div class="comment-form">
-                    <h3>Add a Comment</h3>
-                    <form id="commentForm">
-                        <div class="form-group">
-                            <label for="commentName">Name</label>
-                            <input type="text" id="commentName" placeholder="Your name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="commentEmail">Email (optional)</label>
-                            <input type="email" id="commentEmail" placeholder="Your email">
-                        </div>
-                        <div class="form-group">
-                            <label for="commentText">Comment</label>
-                            <textarea id="commentText" rows="4" placeholder="Share your thoughts..." required></textarea>
-                        </div>
-                        <button type="submit" class="comment-submit">
-                            <i class="fas fa-paper-plane"></i> Post Comment
-                        </button>
-                    </form>
-                </div>
-                
-                <!-- Comments List -->
-                <div class="comments-list" id="commentsList">
-                    <!-- Comments will be dynamically loaded here -->
-                </div>
-            </div>
-        </div>
-
-        <!-- Bookmarks Page -->
-        <div id="bookmarksPage" class="bookmarks-page">
-            <div class="bookmarks-header">
-                <h2 class="section-title">Your Bookmarked Articles</h2>
-                <button class="action-btn" id="clearBookmarks">
-                    <i class="fas fa-trash"></i> Clear All
-                </button>
-            </div>
-            
-            <div id="bookmarksGrid" class="articles-grid">
-                <!-- Bookmarked articles will be dynamically loaded here -->
-            </div>
-            
-            <div id="emptyBookmarksPage" class="empty-state" style="display: none;">
-                <i class="fas fa-bookmark"></i>
-                <h3>No Bookmarks Yet</h3>
-                <p>Start bookmarking articles to save them for later reading!</p>
-                <a href="#" class="action-btn" data-page="home" style="margin-top: 20px;">
-                    <i class="fas fa-book-open"></i> Browse Articles
-                </a>
             </div>
         </div>
 
         <!-- Newsletter Section -->
         <section class="newsletter">
-            <div class="newsletter-content">
-                <h2>Never Miss an Update</h2>
-                <p>Subscribe to our newsletter and get the latest study tips, articles, and resources delivered directly to your inbox.</p>
-                <form class="newsletter-form" id="newsletterForm">
-                    <input type="email" id="newsletterEmail" placeholder="Enter your email address" required>
-                    <button type="submit">
-                        <i class="fas fa-paper-plane"></i> Subscribe
-                    </button>
-                </form>
-            </div>
+            <h2>Subscribe to Our Study Newsletter</h2>
+            <p>Get weekly updates with new study materials, articles, and learning tips directly in your inbox.</p>
+            <form class="newsletter-form" id="newsletterForm">
+                <input type="email" id="newsletterEmail" placeholder="Enter your email address" required>
+                <button type="submit">Subscribe</button>
+            </form>
         </section>
     </div>
 
@@ -1342,163 +868,251 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
-                    <h3>StudySphere Pro</h3>
-                    <p style="color: var(--gray); margin-bottom: 20px;">Advanced learning platform for students and professionals. Bookmark, comment, and export articles.</p>
+                    <h3>StudySphere</h3>
+                    <p style="color: #b0b7c3; margin-bottom: 20px;">Your premier destination for quality study notes and educational articles across all subjects.</p>
                     <div style="display: flex; gap: 15px;">
-                        <a href="#" style="color: var(--gray); font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
-                        <a href="#" style="color: var(--gray); font-size: 1.2rem;"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" style="color: var(--gray); font-size: 1.2rem;"><i class="fab fa-github"></i></a>
-                        <a href="#" style="color: var(--gray); font-size: 1.2rem;"><i class="fab fa-discord"></i></a>
+                        <a href="#" style="color: white; font-size: 1.2rem;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="color: white; font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: white; font-size: 1.2rem;"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="color: white; font-size: 1.2rem;"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
                 
                 <div class="footer-column">
-                    <h3>Features</h3>
+                    <h3>Quick Links</h3>
                     <ul>
-                        <li><a href="#"><i class="fas fa-bookmark"></i> Smart Bookmarks</a></li>
-                        <li><a href="#"><i class="fas fa-comments"></i> Comments System</a></li>
-                        <li><a href="#"><i class="fas fa-file-pdf"></i> PDF Export</a></li>
-                        <li><a href="#"><i class="fas fa-moon"></i> Dark Mode</a></li>
-                        <li><a href="#"><i class="fas fa-chart-line"></i> Reading Progress</a></li>
+                        <li><a href="#" data-nav="home">Home</a></li>
+                        <li><a href="#" data-nav="notes">Study Notes</a></li>
+                        <li><a href="#" data-nav="articles">Articles</a></li>
+                        <li><a href="#" data-nav="subjects">Subject Categories</a></li>
+                        <li><a href="#" data-nav="authors">Contributors</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-column">
                     <h3>Resources</h3>
                     <ul>
-                        <li><a href="#"><i class="fas fa-graduation-cap"></i> Study Guides</a></li>
-                        <li><a href="#"><i class="fas fa-file-alt"></i> Research Papers</a></li>
-                        <li><a href="#"><i class="fas fa-tools"></i> Learning Tools</a></li>
-                        <li><a href="#"><i class="fas fa-calendar-alt"></i> Study Planner</a></li>
-                        <li><a href="#"><i class="fas fa-question-circle"></i> Help Center</a></li>
+                        <li><a href="#">Study Guides</a></li>
+                        <li><a href="#">Exam Preparation</a></li>
+                        <li><a href="#">Research Papers</a></li>
+                        <li><a href="#">Educational Tools</a></li>
+                        <li><a href="#">Learning Strategies</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-column">
-                    <h3>Contact</h3>
+                    <h3>Contact Us</h3>
                     <ul>
-                        <li><a href="#"><i class="fas fa-envelope"></i> support@studysphere.pro</a></li>
-                        <li><a href="#"><i class="fas fa-phone"></i> +1 (555) 123-4567</a></li>
-                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> 456 Learning St, Edu City</a></li>
-                        <li><a href="#"><i class="fas fa-file-contract"></i> Privacy Policy</a></li>
-                        <li><a href="#"><i class="fas fa-file-signature"></i> Terms of Service</a></li>
+                        <li><i class="fas fa-envelope" style="margin-right: 10px;"></i> contact@studysphere.com</li>
+                        <li><i class="fas fa-phone" style="margin-right: 10px;"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> 123 Education St, Knowledge City</li>
                     </ul>
                 </div>
             </div>
             
             <div class="copyright">
-                <p>&copy; 2023 StudySphere Pro. All rights reserved. | Data loaded from external JSON file</p>
+                <p>&copy; 2023 StudySphere. All rights reserved. | Designed for Students & Educators</p>
             </div>
         </div>
     </footer>
 
-    <!-- jsPDF Library for PDF Export -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    
+    <!-- JSON Data (Simulated External File) -->
+    <script id="blogData" type="application/json">
+        {
+            "articles": [
+                {
+                    "id": 1,
+                    "title": "Understanding Quantum Mechanics Basics",
+                    "excerpt": "A beginner-friendly guide to the fundamental principles of quantum mechanics with practical examples and visual explanations.",
+                    "content": "<h2>Introduction to Quantum Mechanics</h2><p>Quantum mechanics is the branch of physics that deals with the behavior of matter and energy at the atomic and subatomic levels. It represents a fundamental departure from classical physics, introducing concepts that often seem counterintuitive.</p><h2>Key Principles</h2><p>The key principles of quantum mechanics include wave-particle duality, the uncertainty principle, and quantum superposition. These concepts form the foundation of our understanding of the quantum world.</p><h2>Practical Applications</h2><p>Quantum mechanics has led to numerous technological advancements including transistors, lasers, and MRI machines. It also forms the basis for emerging technologies like quantum computing and quantum cryptography.</p>",
+                    "category": "Physics",
+                    "author": {
+                        "id": 1,
+                        "name": "Dr. Sarah Johnson",
+                        "avatar": "SJ",
+                        "bio": "Professor of Physics at Stanford University with 15 years of teaching experience."
+                    },
+                    "date": "2023-03-15",
+                    "readTime": "8 min",
+                    "views": 1245,
+                    "tags": ["quantum", "physics", "science", "basics"],
+                    "image": "physics"
+                },
+                {
+                    "id": 2,
+                    "title": "DNA Replication: Step-by-Step Process",
+                    "excerpt": "Detailed explanation of DNA replication process with diagrams and key enzymes involved in the mechanism.",
+                    "content": "<h2>The DNA Replication Process</h2><p>DNA replication is the biological process by which DNA makes a copy of itself during cell division. This process is fundamental to all living organisms and ensures genetic continuity.</p><h2>Key Enzymes Involved</h2><p>The main enzymes involved in DNA replication include DNA helicase, DNA polymerase, DNA ligase, and primase. Each plays a critical role in unwinding, copying, and sealing the DNA strands.</p><h2>Step-by-Step Mechanism</h2><p>The replication process begins at specific sites called origins of replication. The DNA double helix is unwound by helicase, and each strand serves as a template for the synthesis of a new complementary strand.</p>",
+                    "category": "Biology",
+                    "author": {
+                        "id": 2,
+                        "name": "Michael Chen",
+                        "avatar": "MC",
+                        "bio": "Molecular biologist and author of several genetics textbooks."
+                    },
+                    "date": "2023-03-12",
+                    "readTime": "6 min",
+                    "views": 987,
+                    "tags": ["dna", "biology", "genetics", "replication"],
+                    "image": "biology"
+                },
+                {
+                    "id": 3,
+                    "title": "Calculus Fundamentals: Derivatives & Integrals",
+                    "excerpt": "Master the basics of calculus with practical problems and real-world applications of derivatives and integrals.",
+                    "content": "<h2>Introduction to Calculus</h2><p>Calculus is the mathematical study of continuous change, much like geometry is the study of shape and algebra is the study of generalizations of arithmetic operations.</p><h2>Understanding Derivatives</h2><p>Derivatives represent the rate of change of a function with respect to a variable. They have applications in physics, engineering, economics, and many other fields.</p><h2>Mastering Integrals</h2><p>Integration is the inverse process of differentiation and is used to calculate areas, volumes, and other concepts related to accumulation.</p>",
+                    "category": "Mathematics",
+                    "author": {
+                        "id": 3,
+                        "name": "Prof. Robert Williams",
+                        "avatar": "RW",
+                        "bio": "Mathematics professor and author with over 20 published papers on calculus education."
+                    },
+                    "date": "2023-03-10",
+                    "readTime": "10 min",
+                    "views": 1567,
+                    "tags": ["calculus", "mathematics", "derivatives", "integrals"],
+                    "image": "math"
+                },
+                {
+                    "id": 4,
+                    "title": "The Renaissance: Art, Science & Culture",
+                    "excerpt": "Exploring the cultural rebirth of Europe from the 14th to 17th centuries and its impact on modern society.",
+                    "content": "<h2>The Renaissance Era</h2><p>The Renaissance was a period in European history marking the transition from the Middle Ages to modernity, covering the 15th and 16th centuries.</p><h2>Artistic Revolution</h2><p>The period saw revolutionary developments in art, with masters like Leonardo da Vinci, Michelangelo, and Raphael creating works that defined Western art for centuries.</p><h2>Scientific Advancements</h2><p>The Renaissance also witnessed significant scientific discoveries, challenging traditional beliefs and laying the groundwork for modern science.</p>",
+                    "category": "History",
+                    "author": {
+                        "id": 4,
+                        "name": "Dr. Elena Rodriguez",
+                        "avatar": "ER",
+                        "bio": "Historian specializing in European cultural history and Renaissance studies."
+                    },
+                    "date": "2023-03-08",
+                    "readTime": "7 min",
+                    "views": 834,
+                    "tags": ["renaissance", "history", "art", "culture"],
+                    "image": "history"
+                },
+                {
+                    "id": 5,
+                    "title": "Statistics for Data Analysis",
+                    "excerpt": "Comprehensive guide to statistical methods used in data analysis with practical examples and case studies.",
+                    "content": "<h2>Importance of Statistics</h2><p>Statistics is the science of collecting, analyzing, interpreting, and presenting data. It's essential for making informed decisions in business, science, and public policy.</p><h2>Key Statistical Concepts</h2><p>Fundamental concepts include probability distributions, hypothesis testing, regression analysis, and confidence intervals.</p><h2>Applications in Data Science</h2><p>Statistical methods form the backbone of data science and machine learning algorithms, enabling pattern recognition and predictive modeling.</p>",
+                    "category": "Mathematics",
+                    "author": {
+                        "id": 5,
+                        "name": "Dr. James Wilson",
+                        "avatar": "JW",
+                        "bio": "Data scientist and statistician with expertise in analytical methods and machine learning."
+                    },
+                    "date": "2023-03-05",
+                    "readTime": "9 min",
+                    "views": 2103,
+                    "tags": ["statistics", "data", "analysis", "mathematics"],
+                    "image": "data"
+                },
+                {
+                    "id": 6,
+                    "title": "Python Programming Basics",
+                    "excerpt": "Learn Python programming from scratch with hands-on examples and projects for beginners.",
+                    "content": "<h2>Why Learn Python?</h2><p>Python is a versatile, high-level programming language known for its simplicity and readability. It's widely used in web development, data science, AI, and automation.</p><h2>Basic Syntax and Concepts</h2><p>Python's clean syntax makes it an ideal first programming language. Key concepts include variables, data types, control structures, functions, and modules.</p><h2>Practical Applications</h2><p>From web development with Django to data analysis with pandas and machine learning with scikit-learn, Python has libraries for almost every application.</p>",
+                    "category": "Computer Science",
+                    "author": {
+                        "id": 6,
+                        "name": "Alex Thompson",
+                        "avatar": "AT",
+                        "bio": "Software developer and coding instructor with 10+ years of Python experience."
+                    },
+                    "date": "2023-02-28",
+                    "readTime": "11 min",
+                    "views": 2987,
+                    "tags": ["python", "programming", "coding", "computer science"],
+                    "image": "coding"
+                }
+            ],
+            "categories": [
+                {"name": "Mathematics", "count": 42, "color": "#4361ee"},
+                {"name": "Physics", "count": 28, "color": "#3a0ca3"},
+                {"name": "Chemistry", "count": 35, "color": "#7209b7"},
+                {"name": "Biology", "count": 31, "color": "#f72585"},
+                {"name": "Computer Science", "count": 46, "color": "#4cc9f0"},
+                {"name": "History", "count": 22, "color": "#ff9e00"},
+                {"name": "Literature", "count": 19, "color": "#4bb543"}
+            ],
+            "studyTips": [
+                "Use the Pomodoro Technique: Study for 25 minutes, then take a 5-minute break.",
+                "Create mind maps to visualize complex topics and their relationships.",
+                "Teach what you've learned to someone else to reinforce your understanding.",
+                "Practice active recall by testing yourself instead of just rereading notes.",
+                "Connect new information to what you already know to improve retention.",
+                "Get enough sleep - it's crucial for memory consolidation and learning.",
+                "Vary your study locations to create multiple memory associations."
+            ]
+        }
+    </script>
+
     <script>
-        // Global state
+        // Application State
         const state = {
             articles: [],
             categories: [],
-            comments: [],
             studyTips: [],
-            currentView: 'home',
+            currentView: 'articles', // 'articles' or 'blogPost'
             currentPostId: null,
             displayedArticles: 4,
-            searchQuery: '',
-            bookmarks: JSON.parse(localStorage.getItem('studySphereBookmarks')) || [],
-            theme: localStorage.getItem('studySphereTheme') || 'light',
-            readingProgress: 0
+            searchQuery: ''
         };
 
         // DOM Elements
-        const homePage = document.getElementById('homePage');
+        const articlesView = document.getElementById('articlesView');
         const blogPostView = document.getElementById('blogPostView');
-        const bookmarksPage = document.getElementById('bookmarksPage');
         const articlesGrid = document.getElementById('articlesGrid');
         const blogPostContainer = document.getElementById('blogPostContainer');
-        const commentsList = document.getElementById('commentsList');
         const categoriesList = document.getElementById('categoriesList');
         const recentPosts = document.getElementById('recentPosts');
-        const bookmarkedPosts = document.getElementById('bookmarkedPosts');
-        const bookmarksGrid = document.getElementById('bookmarksGrid');
+        const popularPosts = document.getElementById('popularPosts');
+        const studyTip = document.getElementById('studyTip');
         const loadingArticles = document.getElementById('loadingArticles');
         const loadingCategories = document.getElementById('loadingCategories');
         const loadingRecent = document.getElementById('loadingRecent');
-        const loadingBookmarks = document.getElementById('loadingBookmarks');
+        const loadingPopular = document.getElementById('loadingPopular');
         const loadMoreBtn = document.getElementById('loadMoreBtn');
         const backToArticles = document.getElementById('backToArticles');
         const searchInput = document.getElementById('searchInput');
-        const themeToggle = document.getElementById('themeToggle');
+        const exploreBtn = document.getElementById('exploreBtn');
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mainNav = document.getElementById('mainNav');
-        const homeLink = document.getElementById('homeLink');
-        const clearBookmarks = document.getElementById('clearBookmarks');
-        const emptyBookmarks = document.getElementById('emptyBookmarks');
-        const emptyBookmarksPage = document.getElementById('emptyBookmarksPage');
-        const commentForm = document.getElementById('commentForm');
-        const commentsCount = document.getElementById('commentsCount');
         const newsletterForm = document.getElementById('newsletterForm');
-        const readingProgress = document.getElementById('readingProgress');
-        const readingProgressBar = document.getElementById('readingProgressBar');
-        const totalArticles = document.getElementById('totalArticles');
 
-        // Icon mapping
-        const iconMap = {
-            'atom': 'fas fa-atom',
-            'brain': 'fas fa-brain',
-            'flask': 'fas fa-flask',
-            'calculator': 'fas fa-calculator',
-            'link': 'fas fa-link',
-            'dna': 'fas fa-dna',
-            'code': 'fas fa-code',
-            'vial': 'fas fa-vial',
-            'default': 'fas fa-book-open'
+        // Image mapping for article images
+        const imageMap = {
+            'physics': '<i class="fas fa-atom"></i>',
+            'biology': '<i class="fas fa-dna"></i>',
+            'math': '<i class="fas fa-calculator"></i>',
+            'history': '<i class="fas fa-globe-europe"></i>',
+            'data': '<i class="fas fa-chart-bar"></i>',
+            'coding': '<i class="fas fa-code"></i>',
+            'default': '<i class="fas fa-book-open"></i>'
         };
 
         // Initialize the application
-        document.addEventListener('DOMContentLoaded', async () => {
-            // Set initial theme
-            if (state.theme === 'dark') {
-                document.body.classList.add('dark-theme');
-                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-            }
-
-            // Load external JSON data
-            await loadExternalData();
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load data from JSON
+            loadData();
             
             // Set up event listeners
             setupEventListeners();
             
-            // Update bookmark widgets
-            updateBookmarkWidgets();
-            
-            // Update stats
-            updateStats();
+            // Set random study tip
+            setRandomStudyTip();
         });
 
-        // Load external JSON data
-        async function loadExternalData() {
+        // Load data from JSON
+        function loadData() {
             try {
-                // Show loading state
-                if (loadingArticles) loadingArticles.style.display = 'block';
-                if (loadingCategories) loadingCategories.style.display = 'block';
-                if (loadingRecent) loadingRecent.style.display = 'block';
-                if (loadingBookmarks) loadingBookmarks.style.display = 'block';
+                const data = JSON.parse(document.getElementById('blogData').textContent);
                 
-                // Load the external JSON file
-                const response = await fetch('studysphere-data.json');
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                
-                const data = await response.json();
-                
-                // Store data in state
                 state.articles = data.articles || [];
                 state.categories = data.categories || [];
-                state.comments = data.comments || [];
                 state.studyTips = data.studyTips || [];
                 
                 // Sort articles by date (newest first)
@@ -1508,107 +1122,16 @@
                 renderArticles();
                 renderCategories();
                 renderRecentPosts();
-                renderBookmarkedPosts();
-                
-                // Hide loading states
-                if (loadingArticles) loadingArticles.style.display = 'none';
-                if (loadingCategories) loadingCategories.style.display = 'none';
-                if (loadingRecent) loadingRecent.style.display = 'none';
-                if (loadingBookmarks) loadingBookmarks.style.display = 'none';
-                
-                console.log('Data loaded successfully from external JSON file:', data.siteInfo?.name);
+                renderPopularPosts();
                 
             } catch (error) {
-                console.error('Error loading external data:', error);
-                
-                // Show error to user
-                showError('Failed to load data. Please check if "studysphere-data.json" file exists and contains valid JSON.');
-                
-                // Use fallback data
-                loadFallbackData();
+                console.error('Error loading blog data:', error);
+                showError('Failed to load blog data. Please try again later.');
             }
-        }
-
-        // Fallback data if external file fails
-        function loadFallbackData() {
-            const fallbackData = {
-                articles: [
-                    {
-                        id: 1,
-                        title: "Sample Article",
-                        excerpt: "This is a sample article that loads when external data fails.",
-                        content: "<h2>Sample Content</h2><p>This content loads when the external JSON file cannot be loaded.</p>",
-                        category: "General",
-                        author: { id: 1, name: "Admin", avatar: "A", bio: "System Administrator" },
-                        date: "2023-01-01",
-                        readTime: 5,
-                        views: 100,
-                        likes: 10,
-                        commentsCount: 0,
-                        tags: ["sample"],
-                        icon: "default",
-                        featured: true
-                    }
-                ],
-                categories: [
-                    { name: "General", count: 1, color: "#7C3AED", icon: "book" }
-                ],
-                comments: [],
-                studyTips: ["Check that the JSON file exists and is valid."]
-            };
-            
-            state.articles = fallbackData.articles;
-            state.categories = fallbackData.categories;
-            state.comments = fallbackData.comments;
-            state.studyTips = fallbackData.studyTips;
-            
-            renderArticles();
-            renderCategories();
-            renderRecentPosts();
-            
-            // Hide loading states
-            if (loadingArticles) loadingArticles.style.display = 'none';
-            if (loadingCategories) loadingCategories.style.display = 'none';
-            if (loadingRecent) loadingRecent.style.display = 'none';
-            if (loadingBookmarks) loadingBookmarks.style.display = 'none';
         }
 
         // Set up event listeners
         function setupEventListeners() {
-            // Theme toggle
-            themeToggle.addEventListener('click', toggleTheme);
-            
-            // Mobile menu toggle
-            mobileMenuBtn.addEventListener('click', () => {
-                mainNav.classList.toggle('active');
-                mobileMenuBtn.innerHTML = mainNav.classList.contains('active') 
-                    ? '<i class="fas fa-times"></i>' 
-                    : '<i class="fas fa-bars"></i>';
-            });
-            
-            // Home link
-            homeLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                showPage('home');
-            });
-            
-            // Navigation links
-            document.querySelectorAll('[data-page]').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const page = e.target.closest('a').getAttribute('data-page');
-                    showPage(page);
-                    // Close mobile menu if open
-                    if (mainNav.classList.contains('active')) {
-                        mainNav.classList.remove('active');
-                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                    }
-                });
-            });
-            
-            // Search input
-            searchInput.addEventListener('input', handleSearch);
-            
             // Load more articles button
             if (loadMoreBtn) {
                 loadMoreBtn.addEventListener('click', loadMoreArticles);
@@ -1618,107 +1141,76 @@
             if (backToArticles) {
                 backToArticles.addEventListener('click', (e) => {
                     e.preventDefault();
-                    showPage('home');
+                    showArticlesView();
                 });
             }
             
-            // Clear bookmarks button
-            if (clearBookmarks) {
-                clearBookmarks.addEventListener('click', clearAllBookmarks);
+            // Search input
+            if (searchInput) {
+                searchInput.addEventListener('input', handleSearch);
             }
             
-            // Comment form submission
-            if (commentForm) {
-                commentForm.addEventListener('submit', handleCommentSubmit);
+            // Explore button
+            if (exploreBtn) {
+                exploreBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    document.querySelector('.articles-section').scrollIntoView({ behavior: 'smooth' });
+                });
             }
             
-            // Newsletter form submission
+            // Mobile menu toggle
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    mainNav.classList.toggle('active');
+                    mobileMenuBtn.innerHTML = mainNav.classList.contains('active') 
+                        ? '<i class="fas fa-times"></i>' 
+                        : '<i class="fas fa-bars"></i>';
+                });
+            }
+            
+            // Navigation links
+            document.querySelectorAll('[data-nav]').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const navTarget = e.target.getAttribute('data-nav');
+                    handleNavigation(navTarget);
+                });
+            });
+            
+            // Newsletter form
             if (newsletterForm) {
                 newsletterForm.addEventListener('submit', handleNewsletterSubmit);
             }
-            
-            // Reading progress tracking
-            window.addEventListener('scroll', updateReadingProgress);
-            
-            // Close mobile menu when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!e.target.closest('nav') && !e.target.closest('.mobile-menu-btn') && mainNav.classList.contains('active')) {
-                    mainNav.classList.remove('active');
-                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                }
-            });
         }
 
-        // Toggle theme
-        function toggleTheme() {
-            if (document.body.classList.contains('dark-theme')) {
-                document.body.classList.remove('dark-theme');
-                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-                state.theme = 'light';
-            } else {
-                document.body.classList.add('dark-theme');
-                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-                state.theme = 'dark';
-            }
-            localStorage.setItem('studySphereTheme', state.theme);
-        }
-
-        // Show page
-        function showPage(page) {
-            // Hide all pages
-            homePage.style.display = 'none';
-            blogPostView.style.display = 'none';
-            bookmarksPage.style.display = 'none';
-            
-            // Reset navigation active state
-            document.querySelectorAll('[data-page]').forEach(link => {
+        // Handle navigation
+        function handleNavigation(target) {
+            // Update active nav link
+            document.querySelectorAll('[data-nav]').forEach(link => {
                 link.classList.remove('active');
             });
+            event.target.classList.add('active');
             
-            // Show selected page
-            switch(page) {
+            // Handle different navigation targets
+            switch(target) {
                 case 'home':
-                    homePage.style.display = 'block';
-                    document.querySelector('[data-page="home"]').classList.add('active');
-                    readingProgress.style.display = 'none';
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                     break;
-                    
-                case 'blogPost':
-                    blogPostView.style.display = 'block';
-                    readingProgress.style.display = 'block';
+                case 'notes':
+                case 'articles':
+                    showArticlesView();
+                    document.querySelector('.articles-section').scrollIntoView({ behavior: 'smooth' });
                     break;
-                    
-                case 'bookmarks':
-                    bookmarksPage.style.display = 'block';
-                    document.querySelector('[data-page="bookmarks"]').classList.add('active');
-                    renderBookmarksPage();
-                    readingProgress.style.display = 'none';
-                    break;
-                    
                 case 'subjects':
-                    showPage('home');
-                    document.querySelector('[data-page="subjects"]').classList.add('active');
-                    // Scroll to categories
-                    setTimeout(() => {
-                        document.getElementById('categoriesList').scrollIntoView({ behavior: 'smooth' });
-                    }, 100);
+                    document.getElementById('categoriesList').scrollIntoView({ behavior: 'smooth' });
                     break;
-                    
                 case 'authors':
-                    alert('Authors page would show all contributors. Check the JSON data file for author information.');
-                    showPage('home');
-                    document.querySelector('[data-page="authors"]').classList.add('active');
+                    alert('Authors page would show all contributors. In a full implementation, this would filter articles by author.');
                     break;
-                    
                 case 'about':
-                    alert('About page would show information about StudySphere Pro. Check the JSON data file for site information.');
-                    showPage('home');
-                    document.querySelector('[data-page="about"]').classList.add('active');
+                    alert('About page would show information about StudySphere. In a full implementation, this would navigate to an about page.');
                     break;
             }
-            
-            state.currentView = page;
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         // Render articles
@@ -1733,13 +1225,13 @@
                     article.title.toLowerCase().includes(query) ||
                     article.excerpt.toLowerCase().includes(query) ||
                     article.category.toLowerCase().includes(query) ||
-                    (article.tags && article.tags.some(tag => tag.toLowerCase().includes(query)))
+                    article.tags.some(tag => tag.toLowerCase().includes(query))
                 );
             }
             
             // Show/hide load more button
             if (loadMoreBtn) {
-                loadMoreBtn.style.display = filteredArticles.length > state.displayedArticles ? 'inline-flex' : 'none';
+                loadMoreBtn.style.display = filteredArticles.length > state.displayedArticles ? 'inline-block' : 'none';
             }
             
             // Get articles to display
@@ -1750,10 +1242,10 @@
             
             if (articlesToDisplay.length === 0) {
                 articlesGrid.innerHTML = `
-                    <div style="grid-column: 1 / -1; text-align: center; padding: 60px; color: var(--gray);">
-                        <i class="fas fa-search" style="font-size: 4rem; margin-bottom: 20px; color: var(--light-gray);"></i>
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--gray);">
+                        <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 20px; color: var(--light-gray);"></i>
                         <h3>No articles found</h3>
-                        <p>${state.searchQuery ? 'Try a different search term' : 'No articles available'}.</p>
+                        <p>Try a different search term or browse all articles.</p>
                     </div>
                 `;
             } else {
@@ -1764,11 +1256,14 @@
                 });
             }
             
-            // Show grid
+            // Hide loading and show grid
+            if (loadingArticles) {
+                loadingArticles.style.display = 'none';
+            }
             articlesGrid.style.display = 'grid';
         }
 
-        // Create article card
+        // Create article card element
         function createArticleCard(article) {
             const articleElement = document.createElement('div');
             articleElement.className = 'article-card';
@@ -1778,27 +1273,19 @@
             const dateObj = new Date(article.date);
             const formattedDate = dateObj.toLocaleDateString('en-US', { 
                 year: 'numeric', 
-                month: 'short', 
+                month: 'long', 
                 day: 'numeric' 
             });
             
-            // Get icon
-            const iconClass = iconMap[article.icon] || iconMap.default;
-            
-            // Check if bookmarked
-            const isBookmarked = state.bookmarks.includes(article.id);
+            // Get image icon
+            const imageIcon = imageMap[article.image] || imageMap.default;
             
             articleElement.innerHTML = `
                 <div class="article-image">
-                    <i class="${iconClass}"></i>
+                    ${imageIcon}
                 </div>
                 <div class="article-content">
-                    <div class="article-header">
-                        <span class="article-category">${article.category}</span>
-                        <button class="article-bookmark ${isBookmarked ? 'active' : ''}" data-id="${article.id}">
-                            <i class="fas fa-bookmark"></i>
-                        </button>
-                    </div>
+                    <span class="article-category">${article.category}</span>
                     <h3 class="article-title">${article.title}</h3>
                     <p class="article-excerpt">${article.excerpt}</p>
                     <div class="article-meta">
@@ -1807,408 +1294,16 @@
                             <span>${article.author.name}</span>
                         </div>
                         <div>
-                            <span><i class="far fa-calendar"></i> ${formattedDate} • ${article.readTime} min</span>
+                            <span><i class="far fa-calendar"></i> ${formattedDate}</span>
                         </div>
                     </div>
                 </div>
             `;
             
             // Add click event to show blog post
-            articleElement.addEventListener('click', (e) => {
-                if (!e.target.closest('.article-bookmark')) {
-                    showBlogPost(article.id);
-                }
-            });
-            
-            // Add bookmark button event
-            const bookmarkBtn = articleElement.querySelector('.article-bookmark');
-            bookmarkBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                toggleBookmark(article.id, bookmarkBtn);
-            });
+            articleElement.addEventListener('click', () => showBlogPost(article.id));
             
             return articleElement;
-        }
-
-        // Show blog post
-        function showBlogPost(id) {
-            const article = state.articles.find(a => a.id === id);
-            if (!article) return;
-            
-            state.currentPostId = id;
-            
-            // Format date
-            const dateObj = new Date(article.date);
-            const formattedDate = dateObj.toLocaleDateString('en-US', { 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
-            });
-            
-            // Get icon
-            const iconClass = iconMap[article.icon] || iconMap.default;
-            
-            // Check if bookmarked
-            const isBookmarked = state.bookmarks.includes(article.id);
-            
-            // Get article comments
-            const articleComments = state.comments.filter(c => c.articleId === id);
-            
-            // Update comments count
-            commentsCount.textContent = `${articleComments.length} Comment${articleComments.length !== 1 ? 's' : ''}`;
-            
-            // Create tags HTML
-            const tagsHTML = article.tags ? article.tags.map(tag => 
-                `<span class="blog-tag" style="background: var(--light-gray); padding: 8px 16px; border-radius: 50px; font-size: 0.9rem; color: var(--gray); margin-right: 10px; display: inline-block; margin-bottom: 10px;">${tag}</span>`
-            ).join('') : '';
-            
-            // Update blog post content
-            blogPostContainer.innerHTML = `
-                <div class="blog-post-header">
-                    <h1 class="blog-post-title">${article.title}</h1>
-                    <div class="blog-post-meta">
-                        <div class="blog-post-author">
-                            <div class="blog-author-avatar">${article.author.avatar}</div>
-                            <div class="blog-author-info">
-                                <h4>${article.author.name}</h4>
-                                <p>${article.author.bio}</p>
-                            </div>
-                        </div>
-                        <div class="blog-post-actions">
-                            <button class="action-btn ${isBookmarked ? 'success' : ''}" id="bookmarkPostBtn">
-                                <i class="fas fa-bookmark"></i> ${isBookmarked ? 'Bookmarked' : 'Bookmark'}
-                            </button>
-                            <button class="action-btn" id="exportPdfBtn">
-                                <i class="fas fa-file-pdf"></i> Export PDF
-                            </button>
-                        </div>
-                    </div>
-                    <div style="margin-top: 20px; color: var(--gray);">
-                        <span><i class="far fa-calendar"></i> ${formattedDate} • </span>
-                        <span><i class="far fa-clock"></i> ${article.readTime} min read • </span>
-                        <span><i class="far fa-eye"></i> ${article.views} views</span>
-                    </div>
-                </div>
-                <div class="blog-post-image">
-                    <i class="${iconClass}"></i>
-                </div>
-                <div class="blog-post-content">
-                    ${article.content}
-                    ${tagsHTML ? `<div style="margin-top: 40px;"><h3>Tags:</h3><div>${tagsHTML}</div></div>` : ''}
-                </div>
-            `;
-            
-            // Set up action buttons
-            document.getElementById('bookmarkPostBtn').addEventListener('click', () => {
-                toggleBookmark(id, document.getElementById('bookmarkPostBtn'));
-            });
-            
-            document.getElementById('exportPdfBtn').addEventListener('click', () => {
-                exportToPDF(article);
-            });
-            
-            // Render comments
-            renderComments(articleComments);
-            
-            // Switch to blog post view
-            showPage('blogPost');
-            
-            // Update reading progress
-            updateReadingProgress();
-            
-            // Update URL (without page reload)
-            history.pushState({ view: 'blogPost', id: id }, '', `?post=${id}`);
-        }
-
-        // Render comments
-        function renderComments(comments) {
-            if (!commentsList) return;
-            
-            commentsList.innerHTML = '';
-            
-            if (comments.length === 0) {
-                commentsList.innerHTML = `
-                    <div class="empty-state" style="padding: 40px;">
-                        <i class="far fa-comments"></i>
-                        <h3>No Comments Yet</h3>
-                        <p>Be the first to share your thoughts on this article!</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            comments.forEach(comment => {
-                const commentElement = document.createElement('div');
-                commentElement.className = 'comment';
-                
-                // Format date
-                const dateObj = new Date(comment.date);
-                const formattedDate = dateObj.toLocaleDateString('en-US', { 
-                    year: 'numeric', 
-                    month: 'long', 
-                    day: 'numeric' 
-                });
-                
-                commentElement.innerHTML = `
-                    <div class="comment-header">
-                        <div class="comment-author">
-                            <div class="comment-avatar">${comment.avatar}</div>
-                            <div class="comment-info">
-                                <h4>${comment.name}</h4>
-                                <span class="comment-date">${formattedDate}</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="comment-content">
-                        ${comment.content}
-                    </div>
-                `;
-                
-                commentsList.appendChild(commentElement);
-            });
-        }
-
-        // Handle comment submission
-        function handleCommentSubmit(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('commentName').value;
-            const email = document.getElementById('commentEmail').value;
-            const text = document.getElementById('commentText').value;
-            
-            if (!name || !text) {
-                showError('Please fill in all required fields');
-                return;
-            }
-            
-            // Create new comment
-            const newComment = {
-                id: Date.now(),
-                articleId: state.currentPostId,
-                name: name,
-                avatar: name.substring(0, 2).toUpperCase(),
-                date: new Date().toISOString().split('T')[0],
-                content: text
-            };
-            
-            // Add to comments
-            state.comments.push(newComment);
-            
-            // Get article comments
-            const articleComments = state.comments.filter(c => c.articleId === state.currentPostId);
-            
-            // Update UI
-            renderComments(articleComments);
-            commentsCount.textContent = `${articleComments.length} Comment${articleComments.length !== 1 ? 's' : ''}`;
-            
-            // Reset form
-            commentForm.reset();
-            
-            // Show success message
-            showSuccess('Comment posted successfully!');
-        }
-
-        // Toggle bookmark
-        function toggleBookmark(articleId, button) {
-            const index = state.bookmarks.indexOf(articleId);
-            
-            if (index === -1) {
-                // Add bookmark
-                state.bookmarks.push(articleId);
-                if (button) {
-                    button.classList.add('active');
-                    if (button.id === 'bookmarkPostBtn') {
-                        button.innerHTML = '<i class="fas fa-bookmark"></i> Bookmarked';
-                        button.classList.add('success');
-                    }
-                }
-                showSuccess('Article bookmarked!');
-            } else {
-                // Remove bookmark
-                state.bookmarks.splice(index, 1);
-                if (button) {
-                    button.classList.remove('active');
-                    if (button.id === 'bookmarkPostBtn') {
-                        button.innerHTML = '<i class="fas fa-bookmark"></i> Bookmark';
-                        button.classList.remove('success');
-                    }
-                }
-                showSuccess('Bookmark removed!');
-            }
-            
-            // Update localStorage
-            localStorage.setItem('studySphereBookmarks', JSON.stringify(state.bookmarks));
-            
-            // Update bookmark widgets
-            updateBookmarkWidgets();
-            
-            // Update bookmarks page if visible
-            if (state.currentView === 'bookmarks') {
-                renderBookmarksPage();
-            }
-        }
-
-        // Update bookmark widgets
-        function updateBookmarkWidgets() {
-            // Update sidebar bookmarks
-            renderBookmarkedPosts();
-            
-            // Update empty state
-            if (state.bookmarks.length === 0) {
-                if (emptyBookmarks) emptyBookmarks.style.display = 'block';
-                if (bookmarkedPosts) bookmarkedPosts.style.display = 'none';
-            } else {
-                if (emptyBookmarks) emptyBookmarks.style.display = 'none';
-                if (bookmarkedPosts) bookmarkedPosts.style.display = 'block';
-            }
-        }
-
-        // Render bookmarked posts in sidebar
-        function renderBookmarkedPosts() {
-            if (!bookmarkedPosts) return;
-            
-            // Clear the list
-            bookmarkedPosts.innerHTML = '';
-            
-            // Get bookmarked articles (limit to 4)
-            const bookmarkedArticles = state.articles
-                .filter(article => state.bookmarks.includes(article.id))
-                .slice(0, 4);
-            
-            // Add bookmarked posts to list
-            bookmarkedArticles.forEach(article => {
-                const li = document.createElement('li');
-                
-                // Format date
-                const dateObj = new Date(article.date);
-                const formattedDate = dateObj.toLocaleDateString('en-US', { 
-                    month: 'short', 
-                    day: 'numeric' 
-                });
-                
-                // Get icon
-                const iconClass = iconMap[article.icon] || iconMap.default;
-                
-                li.innerHTML = `
-                    <a href="#" data-id="${article.id}">
-                        <div class="bookmarked-post">
-                            <div class="bookmarked-post-image">
-                                <i class="${iconClass}"></i>
-                            </div>
-                            <div class="bookmarked-post-content">
-                                <h4>${article.title}</h4>
-                                <span>${formattedDate}</span>
-                            </div>
-                        </div>
-                    </a>
-                `;
-                
-                // Add click event to show blog post
-                li.querySelector('a').addEventListener('click', (e) => {
-                    e.preventDefault();
-                    showBlogPost(article.id);
-                });
-                
-                bookmarkedPosts.appendChild(li);
-            });
-            
-            // Hide loading
-            if (loadingBookmarks) {
-                loadingBookmarks.style.display = 'none';
-            }
-        }
-
-        // Render bookmarks page
-        function renderBookmarksPage() {
-            if (!bookmarksGrid) return;
-            
-            // Get bookmarked articles
-            const bookmarkedArticles = state.articles.filter(article => state.bookmarks.includes(article.id));
-            
-            // Update empty state
-            if (bookmarkedArticles.length === 0) {
-                bookmarksGrid.style.display = 'none';
-                if (emptyBookmarksPage) emptyBookmarksPage.style.display = 'block';
-                return;
-            } else {
-                bookmarksGrid.style.display = 'grid';
-                if (emptyBookmarksPage) emptyBookmarksPage.style.display = 'none';
-            }
-            
-            // Clear the grid
-            bookmarksGrid.innerHTML = '';
-            
-            // Add bookmarked articles to grid
-            bookmarkedArticles.forEach(article => {
-                const articleElement = createArticleCard(article);
-                bookmarksGrid.appendChild(articleElement);
-            });
-        }
-
-        // Clear all bookmarks
-        function clearAllBookmarks() {
-            if (state.bookmarks.length === 0) return;
-            
-            if (confirm('Are you sure you want to remove all bookmarks?')) {
-                state.bookmarks = [];
-                localStorage.setItem('studySphereBookmarks', JSON.stringify(state.bookmarks));
-                updateBookmarkWidgets();
-                renderBookmarksPage();
-                showSuccess('All bookmarks cleared!');
-            }
-        }
-
-        // Export article to PDF
-        function exportToPDF(article) {
-            try {
-                // Create new PDF document
-                const doc = new window.jspdf.jsPDF();
-                
-                // Add title
-                doc.setFontSize(24);
-                doc.setFont('helvetica', 'bold');
-                doc.text(article.title, 20, 30);
-                
-                // Add metadata
-                doc.setFontSize(12);
-                doc.setFont('helvetica', 'normal');
-                doc.text(`By ${article.author.name} | ${new Date(article.date).toLocaleDateString()} | ${article.readTime} min read`, 20, 45);
-                
-                // Add content (strip HTML tags)
-                const content = article.content.replace(/<[^>]*>/g, '');
-                const lines = doc.splitTextToSize(content, 170);
-                doc.setFontSize(11);
-                doc.text(lines, 20, 60);
-                
-                // Add footer
-                doc.setFontSize(10);
-                doc.setTextColor(150);
-                doc.text(`Exported from StudySphere Pro - ${new Date().toLocaleDateString()}`, 20, doc.internal.pageSize.height - 10);
-                
-                // Save PDF
-                doc.save(`studysphere-${article.title.toLowerCase().replace(/\s+/g, '-')}.pdf`);
-                
-                showSuccess('PDF exported successfully!');
-            } catch (error) {
-                console.error('Error exporting PDF:', error);
-                showError('Failed to export PDF. Please try again.');
-            }
-        }
-
-        // Update reading progress
-        function updateReadingProgress() {
-            if (state.currentView !== 'blogPost') return;
-            
-            const windowHeight = window.innerHeight;
-            const documentHeight = document.documentElement.scrollHeight;
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            const progress = (scrollTop / (documentHeight - windowHeight)) * 100;
-            state.readingProgress = Math.min(100, Math.max(0, progress));
-            
-            if (readingProgressBar) {
-                readingProgressBar.style.width = `${state.readingProgress}%`;
-            }
         }
 
         // Render categories
@@ -2234,7 +1329,7 @@
                 
                 // Find category color
                 const categoryData = state.categories.find(cat => cat.name === category);
-                const color = categoryData ? categoryData.color : '#7C3AED';
+                const color = categoryData ? categoryData.color : '#4361ee';
                 
                 li.innerHTML = `
                     <a href="#" data-category="${category}">
@@ -2252,7 +1347,10 @@
                 categoriesList.appendChild(li);
             });
             
-            // Show list
+            // Hide loading and show list
+            if (loadingCategories) {
+                loadingCategories.style.display = 'none';
+            }
             categoriesList.style.display = 'block';
         }
 
@@ -2277,14 +1375,14 @@
                     day: 'numeric' 
                 });
                 
-                // Get icon
-                const iconClass = iconMap[article.icon] || iconMap.default;
+                // Get image icon
+                const imageIcon = imageMap[article.image] || imageMap.default;
                 
                 li.innerHTML = `
                     <a href="#" data-id="${article.id}">
                         <div class="recent-post">
                             <div class="recent-post-image">
-                                <i class="${iconClass}"></i>
+                                ${imageIcon}
                             </div>
                             <div class="recent-post-content">
                                 <h4>${article.title}</h4>
@@ -2303,21 +1401,147 @@
                 recentPosts.appendChild(li);
             });
             
-            // Show list
+            // Hide loading and show list
+            if (loadingRecent) {
+                loadingRecent.style.display = 'none';
+            }
             recentPosts.style.display = 'block';
         }
 
-        // Filter by category
-        function filterByCategory(category) {
-            searchInput.value = category;
-            handleSearch();
+        // Render popular posts
+        function renderPopularPosts() {
+            if (!popularPosts) return;
+            
+            // Clear the list
+            popularPosts.innerHTML = '';
+            
+            // Sort articles by views (most popular first)
+            const popularArticles = [...state.articles]
+                .sort((a, b) => b.views - a.views)
+                .slice(0, 4);
+            
+            // Add popular posts to list
+            popularArticles.forEach(article => {
+                const li = document.createElement('li');
+                
+                // Format date
+                const dateObj = new Date(article.date);
+                const formattedDate = dateObj.toLocaleDateString('en-US', { 
+                    month: 'short', 
+                    day: 'numeric' 
+                });
+                
+                // Get image icon
+                const imageIcon = imageMap[article.image] || imageMap.default;
+                
+                li.innerHTML = `
+                    <a href="#" data-id="${article.id}">
+                        <div class="popular-post">
+                            <div class="popular-post-image">
+                                ${imageIcon}
+                            </div>
+                            <div class="popular-post-content">
+                                <h4>${article.title}</h4>
+                                <span>${formattedDate} • ${article.views.toLocaleString()} views</span>
+                            </div>
+                        </div>
+                    </a>
+                `;
+                
+                // Add click event to show blog post
+                li.querySelector('a').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showBlogPost(article.id);
+                });
+                
+                popularPosts.appendChild(li);
+            });
+            
+            // Hide loading and show list
+            if (loadingPopular) {
+                loadingPopular.style.display = 'none';
+            }
+            popularPosts.style.display = 'block';
         }
 
-        // Handle search
-        function handleSearch() {
-            state.searchQuery = searchInput.value.trim();
-            state.displayedArticles = 4;
-            renderArticles();
+        // Show blog post
+        function showBlogPost(id) {
+            const article = state.articles.find(a => a.id === id);
+            if (!article) return;
+            
+            state.currentView = 'blogPost';
+            state.currentPostId = id;
+            
+            // Format date
+            const dateObj = new Date(article.date);
+            const formattedDate = dateObj.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            
+            // Get image icon
+            const imageIcon = imageMap[article.image] || imageMap.default;
+            
+            // Create tags HTML
+            const tagsHTML = article.tags.map(tag => 
+                `<span class="blog-tag">${tag}</span>`
+            ).join('');
+            
+            // Update blog post content
+            blogPostContainer.innerHTML = `
+                <div class="blog-post-header">
+                    <h1 class="blog-post-title">${article.title}</h1>
+                    <div class="blog-post-meta">
+                        <div class="blog-post-author">
+                            <div class="blog-author-avatar">${article.author.avatar}</div>
+                            <div class="blog-author-info">
+                                <h4>${article.author.name}</h4>
+                                <p>${article.author.bio}</p>
+                            </div>
+                        </div>
+                        <div class="blog-post-date">
+                            <i class="far fa-calendar"></i> ${formattedDate} • 
+                            <i class="far fa-clock"></i> ${article.readTime} read • 
+                            <i class="far fa-eye"></i> ${article.views.toLocaleString()} views
+                        </div>
+                    </div>
+                </div>
+                <div class="blog-post-image">
+                    ${imageIcon}
+                </div>
+                <div class="blog-post-content">
+                    ${article.content}
+                </div>
+                <div class="blog-post-footer">
+                    <div class="blog-tags">
+                        ${tagsHTML}
+                    </div>
+                </div>
+            `;
+            
+            // Switch views
+            articlesView.style.display = 'none';
+            blogPostView.style.display = 'block';
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Update URL (without page reload)
+            history.pushState({ view: 'blogPost', id: id }, '', `?post=${id}`);
+        }
+
+        // Show articles view
+        function showArticlesView() {
+            state.currentView = 'articles';
+            state.currentPostId = null;
+            
+            // Switch views
+            blogPostView.style.display = 'none';
+            articlesView.style.display = 'flex';
+            
+            // Update URL (without page reload)
+            history.pushState({ view: 'articles' }, '', '?');
         }
 
         // Load more articles
@@ -2326,18 +1550,35 @@
             renderArticles();
             
             // Scroll to newly loaded articles
-            setTimeout(() => {
-                const newArticles = document.querySelectorAll('.article-card');
-                if (newArticles.length > 0) {
-                    newArticles[newArticles.length - 1].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                }
-            }, 100);
+            const newArticles = document.querySelectorAll('.article-card');
+            if (newArticles.length > 0) {
+                newArticles[newArticles.length - 1].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
         }
 
-        // Update stats
-        function updateStats() {
-            if (totalArticles) {
-                totalArticles.textContent = state.articles.length;
+        // Handle search
+        function handleSearch() {
+            state.searchQuery = searchInput.value.trim();
+            state.displayedArticles = 4; // Reset to initial number
+            renderArticles();
+        }
+
+        // Filter by category
+        function filterByCategory(category) {
+            searchInput.value = category;
+            handleSearch();
+            
+            // Update active nav
+            document.querySelectorAll('[data-nav]').forEach(link => {
+                link.classList.remove('active');
+            });
+        }
+
+        // Set random study tip
+        function setRandomStudyTip() {
+            if (state.studyTips.length > 0 && studyTip) {
+                const randomIndex = Math.floor(Math.random() * state.studyTips.length);
+                studyTip.textContent = `"${state.studyTips[randomIndex]}"`;
             }
         }
 
@@ -2347,103 +1588,36 @@
             const email = document.getElementById('newsletterEmail').value;
             
             if (email) {
-                showSuccess(`Thank you for subscribing with email: ${email}. You'll receive our next newsletter soon!`);
+                alert(`Thank you for subscribing with email: ${email}. You'll receive our next newsletter soon!`);
                 e.target.reset();
-            }
-        }
-
-        // Show success message
-        function showSuccess(message) {
-            // Create success toast
-            const toast = document.createElement('div');
-            toast.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: linear-gradient(135deg, var(--success), #059669);
-                color: white;
-                padding: 16px 24px;
-                border-radius: 12px;
-                box-shadow: var(--shadow-lg);
-                z-index: 10000;
-                display: flex;
-                align-items: center;
-                gap: 12px;
-                max-width: 400px;
-                animation: slideIn 0.3s ease;
-            `;
-            
-            toast.innerHTML = `
-                <i class="fas fa-check-circle"></i>
-                <span>${message}</span>
-            `;
-            
-            document.body.appendChild(toast);
-            
-            // Remove after 3 seconds
-            setTimeout(() => {
-                toast.style.animation = 'slideOut 0.3s ease';
-                setTimeout(() => {
-                    if (toast.parentNode) {
-                        toast.parentNode.removeChild(toast);
-                    }
-                }, 300);
-            }, 3000);
-            
-            // Add CSS for animations
-            if (!document.querySelector('#toast-animations')) {
-                const style = document.createElement('style');
-                style.id = 'toast-animations';
-                style.textContent = `
-                    @keyframes slideIn {
-                        from { transform: translateX(100%); opacity: 0; }
-                        to { transform: translateX(0); opacity: 1; }
-                    }
-                    @keyframes slideOut {
-                        from { transform: translateX(0); opacity: 1; }
-                        to { transform: translateX(100%); opacity: 0; }
-                    }
-                `;
-                document.head.appendChild(style);
             }
         }
 
         // Show error message
         function showError(message) {
-            // Create error toast
-            const toast = document.createElement('div');
-            toast.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: linear-gradient(135deg, var(--danger), #DC2626);
+            // Create error element
+            const errorEl = document.createElement('div');
+            errorEl.style.cssText = `
+                background-color: var(--danger);
                 color: white;
-                padding: 16px 24px;
-                border-radius: 12px;
-                box-shadow: var(--shadow-lg);
-                z-index: 10000;
-                display: flex;
-                align-items: center;
-                gap: 12px;
-                max-width: 400px;
-                animation: slideIn 0.3s ease;
+                padding: 15px;
+                border-radius: 8px;
+                margin: 20px 0;
+                text-align: center;
             `;
+            errorEl.innerHTML = `<i class="fas fa-exclamation-triangle"></i> ${message}`;
             
-            toast.innerHTML = `
-                <i class="fas fa-exclamation-triangle"></i>
-                <span>${message}</span>
-            `;
-            
-            document.body.appendChild(toast);
+            // Insert after hero section
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.parentNode.insertBefore(errorEl, hero.nextSibling);
+            }
             
             // Remove after 5 seconds
             setTimeout(() => {
-                toast.style.animation = 'slideOut 0.3s ease';
-                setTimeout(() => {
-                    if (toast.parentNode) {
-                        toast.parentNode.removeChild(toast);
-                    }
-                }, 300);
+                if (errorEl.parentNode) {
+                    errorEl.parentNode.removeChild(errorEl);
+                }
             }, 5000);
         }
 
@@ -2455,7 +1629,7 @@
             if (postId) {
                 showBlogPost(parseInt(postId));
             } else {
-                showPage('home');
+                showArticlesView();
             }
         });
     </script>
